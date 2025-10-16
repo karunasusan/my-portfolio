@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <!-- ⚙️ Basic & SEO Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Karuna Susan Benny | Frontend Developer</title>
@@ -10,25 +9,22 @@
     <meta name="theme-color" content="#1D1D1D" media="(prefers-color-scheme: dark)"/>
     <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)"/>
     <link rel="canonical" href="https://your-domain.com/" />
+    <meta name="google" content="notranslate">
 
-    <!-- 🌐 Social Media Preview (Open Graph & Twitter) -->
     <meta property="og:title" content="Karuna Susan Benny | Frontend Developer"/>
     <meta property="og:description" content="Welcome to my portfolio. Let's build something amazing together."/>
-    <meta property="og:image" content="assets/images/profile-pic.jpg"/>
+    <meta property="og:image" content="assets/images/img.jpg"/>
     <meta property="og:url" content="https://your-domain.com/"/>
     <meta property="og:type" content="website"/>
     <meta name="twitter:card" content="summary_large_image"/>
     
-    <!-- ✨ Favicon -->
-    <link rel="icon" href="assets/icons/favicon.png" type="image/svg+xml">
+    <link rel="icon" href="assets/icons/favicon1.svg" type="image/png">
 
-    <!-- 🎨 Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <!-- 📄 Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -37,19 +33,14 @@
             <a href="#home" class="nav-item active"><i class='bx bxs-home'></i><span>Home</span></a>
             <a href="#about" class="nav-item"><i class='bx bxs-user'></i><span>About</span></a>
             <a href="#education" class="nav-item"><i class='bx bxs-graduation'></i><span>Education</span></a>
-            <a href="#certification" class="nav-item"><i class='bx bxs-certification'></i><span>Certification</span></a>
-            <a href="#project" class="nav-item"><i class='bx bxs-briefcase-alt-2'></i><span>Projects</span></a>
+            <a href="#certs" class="nav-item"><i class='bx bxs-certification'></i><span>Certs</span></a>
+            <a href="#projects" class="nav-item"><i class='bx bxs-briefcase-alt-2'></i><span>Projects</span></a>
             <a href="#contact" class="nav-item"><i class='bx bxs-envelope'></i><span>Contact</span></a>
         </div>
         <div class="mobile-nav-footer">
             <div class="footer-card" id="mobile-lang-card">
                 <h4>Profile Language</h4>
-                <select class="language-dropdown">
-                    <option value="en">English</option>
-                    <option value="ml">Malayalam</option>
-                    <option value="es">Español</option>
-                    <option value="fr">Français</option>
-                </select>
+                <select class="language-dropdown" id="mobile-lang-select"></select>
             </div>
             <div class="footer-card">
                 <h4>Theme</h4>
@@ -68,37 +59,36 @@
         <header class="header">
             <div class="navbar container">
                 <a href="#home" class="logo">
-                    <img src="/assets/icons/favicon.png" alt="KSB Logo">
+                    <!-- Monochromatic SVG Logo -->
+                    <svg class="logo-svg" width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M25 12.5H43.75V31.25H25V12.5Z" />
+                        <path d="M25 43.75H43.75V87.5H25V43.75Z" />
+                        <path d="M56.25 12.5H75L56.25 50V12.5Z" />
+                        <path d="M56.25 62.5L75 87.5H56.25V62.5Z" />
+                    </svg>
                 </a>
                 <nav class="nav-desktop">
                     <a href="#home" class="nav-item active"><i class='bx bxs-home'></i><span>Home</span></a>
                     <a href="#about" class="nav-item"><i class='bx bxs-user'></i><span>About</span></a>
                     <a href="#education" class="nav-item"><i class='bx bxs-graduation'></i><span>Education</span></a>
-                    <a href="#certification" class="nav-item"><i class='bx bxs-certification'></i><span>Certification</span></a>
-                    <a href="#project" class="nav-item"><i class='bx bxs-briefcase-alt-2'></i><span>Projects</span></a>
+                    <a href="#certs" class="nav-item"><i class='bx bxs-certification'></i><span>Certs</span></a>
+                    <a href="#projects" class="nav-item"><i class='bx bxs-briefcase-alt-2'></i><span>Projects</span></a>
                     <a href="#contact" class="nav-item"><i class='bx bxs-envelope'></i><span>Contact</span></a>
                     <div class="separator"></div>
-                    <label for="themeToggleDesktop" class="theme-toggle st-sunMoonThemeToggleBtn" title="Toggle Theme">
-                        <input type="checkbox" id="themeToggleDesktop" class="themeToggleInput" />
-                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor" stroke="none">
-                            <mask id="moon-mask">
-                                <rect x="0" y="0" width="20" height="20" fill="white"></rect>
-                                <circle cx="11" cy="3" r="8" fill="black"></circle>
-                            </mask>
-                            <circle class="sunMoon" cx="10" cy="10" r="8" mask="url(#moon-mask)"></circle>
-                            <g>
-                                <circle class="sunRay sunRay1" cx="18" cy="10" r="1.5"></circle>
-                                <circle class="sunRay sunRay2" cx="14" cy="16.928" r="1.5"></circle>
-                                <circle class="sunRay sunRay3" cx="6" cy="16.928" r="1.5"></circle>
-                                <circle class="sunRay sunRay4" cx="2" cy="10" r="1.5"></circle>
-                                <circle class="sunRay sunRay5" cx="6" cy="3.1718" r="1.5"></circle>
-                                <circle class="sunRay sunRay6" cx="14" cy="3.1718" r="1.5"></circle>
-                            </g>
-                        </svg>
-                    </label>
+                    <div class="nav-item theme-toggle-container">
+                        <label for="themeToggleDesktop" class="theme-toggle st-sunMoonThemeToggleBtn" title="Toggle Theme">
+                            <input type="checkbox" id="themeToggleDesktop" class="themeToggleInput" />
+                             <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" stroke="none">
+                                <mask id="moon-mask"><rect x="0" y="0" width="20" height="20" fill="white"></rect><circle cx="11" cy="3" r="8" fill="black"></circle></mask>
+                                <circle class="sunMoon" cx="10" cy="10" r="8" mask="url(#moon-mask)"></circle>
+                                <g><circle class="sunRay sunRay1" cx="18" cy="10" r="1.5"></circle><circle class="sunRay sunRay2" cx="14" cy="16.928" r="1.5"></circle><circle class="sunRay sunRay3" cx="6" cy="16.928" r="1.5"></circle><circle class="sunRay sunRay4" cx="2" cy="10" r="1.5"></circle><circle class="sunRay sunRay5" cx="6" cy="3.1718" r="1.5"></circle><circle class="sunRay sunRay6" cx="14" cy="3.1718" r="1.5"></circle></g>
+                            </svg>
+                        </label>
+                        <span>Theme</span>
+                    </div>
                 </nav>
                 <div class="hamburger-container">
-                    <input id="hamburger-checkbox" type="checkbox">
+                     <input id="hamburger-checkbox" type="checkbox">
                     <label class="toggle" for="hamburger-checkbox">
                         <div id="bar1" class="bars"></div>
                         <div id="bar2" class="bars"></div>
@@ -111,47 +101,45 @@
         <main class="container">
             <section class="home-section" id="home">
                 <div class="home-grid">
-                    <div class="home-card">
-                        <div class="home-banner">
-                             <img src="/assets/images/image.png" alt="Abstract Banner">
-                        </div>
-                        <div class="home-content">
-                            <img src="/assets/images/img.jpg" alt="Karuna Susan Benny" class="profile-pic">
-                            <div class="home-text">
-                                <h1>KARUNA SUSAN BENNY</h1>
-                                <p class="tagline" id="tagline">I build <span id="tagline-word"></span><span class="cursor"></span></p>
-                                <div class="location">
-                                    <i class='bx bxs-map'></i>
-                                    <span>Pathanamthitta, Kerala, India</span>
+                    <div class="main-content-area">
+                        <div class="home-card">
+                            <div class="home-banner">
+                                <img src="assets/images/image.png" alt="Abstract Banner">
+                            </div>
+                            <div class="home-content-wrapper">
+                                <img src="assets/images/img.jpg" alt="Karuna Susan Benny" class="profile-pic">
+                                <div class="home-text">
+                                    <h1>KARUNA SUSAN BENNY</h1>
+                                    <p class="tagline" id="tagline">I build <span id="tagline-word"></span><span class="cursor"></span></p>
+                                    <div class="location">
+                                        <i class='bx bxs-map'></i>
+                                        <span>Pathanamthitta, Kerala, India</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="action-buttons">
+                            <a href="mailto:karunasusanbenny@gmail.com" class="btn btn-primary"><i class='bx bxl-gmail'></i><span>Contact</span></a>
+                            <a href="assets/Karuna-Susan-Benny-Resume.pdf" class="btn btn-primary" download><i class='bx bxs-file-pdf'></i><span>Resume</span></a>
+                            <a href="#about" class="btn btn-secondary"><i class='bx bx-down-arrow-alt'></i><span>View More</span></a>
+                        </div>
                     </div>
-                    <div class="language-card home-card" id="desktop-lang-card">
-                        <h3>Profile Language</h3>
-                        <div class="lang-display" id="lang-display">Aa</div>
-                        <select class="language-dropdown" id="lang-select">
-                             <option value="en" data-display="Aa" selected>English</option>
-                             <option value="ml" data-display="അ">Malayalam</option>
-                             <option value="es" data-display="Aa">Español</option>
-                             <option value="fr" data-display="Aa">Français</option>
-                             <option value="de" data-display="Aa">Deutsch</option>
-                             <option value="hi" data-display="आ">हिन्दी</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="action-buttons">
-                    <a href="mailto:karunasusanbenny@gmail.com" class="btn btn-primary">Contact</a>
-                    <a href="assets/Karuna-Susan-Benny-Resume.pdf" class="btn btn-primary" download>Resume</a>
-                    <a href="#about" class="btn btn-secondary">View More</a>
+
+                    <aside class="sidebar-area">
+                        <div class="language-card home-card" id="desktop-lang-card">
+                            <h3>Profile Language</h3>
+                            <div class="lang-display" id="lang-display">Aa</div>
+                            <select class="language-dropdown" id="desktop-lang-select"></select>
+                        </div>
+                        <!-- Other sidebar cards can go here -->
+                    </aside>
                 </div>
             </section>
-            <!-- Other sections will go here: About, Education, etc. -->
-            <section id="about" style="height: 500px; margin-top: 5rem; text-align: center;"><h2 style="font-size: 4rem;">About Section</h2></section>
+            <!-- Other sections -->
+            <section id="about" style="height: 500px; padding-top: 5rem; text-align: center;"><h2 style="font-size: 4rem;">About Section</h2></section>
         </main>
     </div>
 
-    <!-- 📜 JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>

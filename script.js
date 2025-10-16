@@ -4,11 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Mobile Menu Slide Animation ---
     hamburgerCheckbox.addEventListener('change', () => {
-        if (hamburgerCheckbox.checked) {
-            pageWrapper.classList.add('menu-open');
-        } else {
-            pageWrapper.classList.remove('menu-open');
-        }
+        pageWrapper.classList.toggle('menu-open', hamburgerCheckbox.checked);
     });
 
     // --- Theme Toggle Functionality ---
@@ -18,89 +14,96 @@ document.addEventListener('DOMContentLoaded', () => {
     const applyTheme = (theme) => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        if (theme === 'light') {
-            desktopThemeToggle.checked = true;
-            mobileThemeToggle.checked = true;
-        } else {
-            desktopThemeToggle.checked = false;
-            mobileThemeToggle.checked = false;
-        }
+        const isLight = theme === 'light';
+        desktopThemeToggle.checked = isLight;
+        mobileThemeToggle.checked = isLight;
     };
 
     const toggleTheme = () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         applyTheme(newTheme);
     };
 
-    desktopThemeToggle.addEventListener('click', toggleTheme);
-    mobileThemeToggle.addEventListener('click', toggleTheme);
+    desktopThemeToggle.addEventListener('change', toggleTheme);
+    mobileThemeToggle.addEventListener('change', toggleTheme);
 
-    // Load saved theme or set based on system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme) {
-        applyTheme(savedTheme);
-    } else {
-        applyTheme(systemPrefersDark ? 'dark' : 'light');
-    }
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(savedTheme);
 
     // --- Typing Tagline Effect ---
     const taglineWord = document.getElementById('tagline-word');
     if (taglineWord) {
         const words = ["web experiences.", "creative solutions.", "intuitive interfaces."];
-        let wordIndex = 0;
-        let letterIndex = 0;
-        let isDeleting = false;
+        let wordIndex = 0, letterIndex = 0, isDeleting = false;
         
         function typeEffect() {
             const currentWord = words[wordIndex];
-            const currentText = isDeleting 
-                ? currentWord.substring(0, letterIndex - 1)
-                : currentWord.substring(0, letterIndex + 1);
+            const typeSpeed = isDeleting ? 100 : 200;
 
-            taglineWord.textContent = currentText;
-            letterIndex = isDeleting ? letterIndex - 1 : letterIndex + 1;
+            taglineWord.textContent = currentWord.substring(0, letterIndex);
 
-            let typeSpeed = isDeleting ? 100 : 200;
-
-            if (!isDeleting && letterIndex === currentWord.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && letterIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                typeSpeed = 500;
+            if (!isDeleting && letterIndex < currentWord.length) {
+                letterIndex++;
+            } else if (isDeleting && letterIndex > 0) {
+                letterIndex--;
+            } else {
+                isDeleting = !isDeleting;
+                if (!isDeleting) {
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
             }
-            setTimeout(typeEffect, typeSpeed);
+            
+            setTimeout(typeEffect, isDeleting && letterIndex === 0 ? 1000 : (isDeleting ? typeSpeed : (letterIndex === currentWord.length ? 2000 : typeSpeed)));
         }
         typeEffect();
     }
 
-    // --- Language Card Display ---
-    const langSelect = document.getElementById('lang-select');
+    // --- Language Translation Logic ---
+    const desktopLangSelect = document.getElementById('desktop-lang-select');
+    const mobileLangSelect = document.getElementById('mobile-lang-select');
     const langDisplay = document.getElementById('lang-display');
-    if (langSelect && langDisplay) {
-        langSelect.addEventListener('change', (e) => {
-            const selectedOption = e.target.options[e.target.selectedIndex];
-            langDisplay.textContent = selectedOption.getAttribute('data-display');
-            // NOTE: This is where you would call a translation function.
-            // Example: translatePage(selectedOption.value);
-            console.log(`Language changed to: ${selectedOption.value}`);
+    const googleTranslateMeta = document.querySelector('meta[name="google"]');
+
+    const languages = {
+        "en": { "name": "English", "display": "Aa" }, "es": { "name": "Español", "display": "Aa" },
+        "fr": { "name": "Français", "display": "Aa" }, "de": { "name": "Deutsch", "display": "Aa" },
+        "hi": { "name": "हिन्दी", "display": "आ" }, "ml": { "name": "മലയാളം", "display": "അ" }
+        // You can add many more languages here
+    };
+
+    function populateLanguageDropdowns() {
+        const selects = [desktopLangSelect, mobileLangSelect];
+        selects.forEach(select => {
+            if (!select) return;
+            select.innerHTML = '';
+            for (const code in languages) {
+                const option = document.createElement('option');
+                option.value = code;
+                option.textContent = languages[code].name;
+                option.dataset.display = languages[code].display;
+                select.appendChild(option);
+            }
         });
     }
 
-    /*
-    // Placeholder for translation logic
-    function translatePage(languageCode) {
-        // This is a complex feature that requires a third-party library
-        // or API to fetch and replace text content on the page.
-        // For example, using a library like i18next or a service like the
-        // Google Translate API.
+    function handleLanguageChange(event) {
+        const langCode = event.target.value;
+        const selectedOption = event.target.options[event.target.selectedIndex];
         
-        alert(`Page would now be translated to ${languageCode}.`);
+        if (langDisplay) {
+            langDisplay.textContent = selectedOption.dataset.display;
+        }
+        
+        document.documentElement.lang = langCode;
+        if (googleTranslateMeta) {
+            googleTranslateMeta.content = 'translate';
+        }
+        
+        console.log(`Language set to ${langCode}. Browser should now offer to translate.`);
     }
-    */
+    
+    populateLanguageDropdowns();
+    if (desktopLangSelect) desktopLangSelect.addEventListener('change', handleLanguageChange);
+    if (mobileLangSelect) mobileLangSelect.addEventListener('change', handleLanguageChange);
 });
 
