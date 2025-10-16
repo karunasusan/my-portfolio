@@ -6,8 +6,8 @@
     <title>Karuna Susan Benny | Frontend Developer</title>
     <meta name="description" content="Portfolio of Karuna Susan Benny, a creative frontend developer building modern, data-driven web experiences."/>
     <meta name="author" content="Karuna Susan Benny"/>
-    <meta name="theme-color" content="#1D1D1D" media="(prefers-color-scheme: dark)"/>
-    <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)"/>
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"/>
+    <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)"/>
     <link rel="canonical" href="https://your-domain.com/" />
     <meta name="google" content="notranslate">
 
@@ -18,7 +18,7 @@
     <meta property="og:type" content="website"/>
     <meta name="twitter:card" content="summary_large_image"/>
     
-    <link rel="icon" href="assets/icons/favicon1.svg" type="image/png">
+    <link rel="icon" href="assets/icons/favicon1.svg" type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,10 +38,6 @@
             <a href="#contact" class="nav-item"><i class='bx bxs-envelope'></i><span>Contact</span></a>
         </div>
         <div class="mobile-nav-footer">
-            <div class="footer-card" id="mobile-lang-card">
-                <h4>Profile Language</h4>
-                <select class="language-dropdown" id="mobile-lang-select"></select>
-            </div>
             <div class="footer-card">
                 <h4>Theme</h4>
                 <div class="toggle-switch">
@@ -59,13 +55,7 @@
         <header class="header">
             <div class="navbar container">
                 <a href="#home" class="logo">
-                    <!-- Monochromatic SVG Logo -->
-                    <svg class="logo-svg" width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M25 12.5H43.75V31.25H25V12.5Z" />
-                        <path d="M25 43.75H43.75V87.5H25V43.75Z" />
-                        <path d="M56.25 12.5H75L56.25 50V12.5Z" />
-                        <path d="M56.25 62.5L75 87.5H56.25V62.5Z" />
-                    </svg>
+                    <img src="assets/icons/favicon.svg" alt="Logo" class="logo-svg">
                 </a>
                 <nav class="nav-desktop">
                     <a href="#home" class="nav-item active"><i class='bx bxs-home'></i><span>Home</span></a>
@@ -88,8 +78,8 @@
                     </div>
                 </nav>
                 <div class="hamburger-container">
-                     <input id="hamburger-checkbox" type="checkbox">
-                    <label class="toggle" for="hamburger-checkbox">
+                     <input id="checkbox" type="checkbox">
+                    <label class="toggle" for="checkbox">
                         <div id="bar1" class="bars"></div>
                         <div id="bar2" class="bars"></div>
                         <div id="bar3" class="bars"></div>
@@ -131,11 +121,9 @@
                             <div class="lang-display" id="lang-display">Aa</div>
                             <select class="language-dropdown" id="desktop-lang-select"></select>
                         </div>
-                        <!-- Other sidebar cards can go here -->
-                    </aside>
+                        </aside>
                 </div>
             </section>
-            <!-- Other sections -->
             <section id="about" style="height: 500px; padding-top: 5rem; text-align: center;"><h2 style="font-size: 4rem;">About Section</h2></section>
         </main>
     </div>
@@ -143,4 +131,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

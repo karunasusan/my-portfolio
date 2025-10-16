@@ -1,10 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const pageWrapper = document.getElementById('page-wrapper');
-    const hamburgerCheckbox = document.getElementById('hamburger-checkbox');
+    const hamburgerCheckbox = document.getElementById('checkbox');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-list .nav-item');
     
     // --- Mobile Menu Slide Animation ---
     hamburgerCheckbox.addEventListener('change', () => {
         pageWrapper.classList.toggle('menu-open', hamburgerCheckbox.checked);
+    });
+
+    // --- Auto-close mobile menu on link click ---
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (hamburgerCheckbox.checked) {
+                hamburgerCheckbox.checked = false;
+                // Manually trigger the change event to ensure the class is toggled
+                hamburgerCheckbox.dispatchEvent(new Event('change'));
+            }
+        });
     });
 
     // --- Theme Toggle Functionality ---
@@ -60,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Language Translation Logic ---
     const desktopLangSelect = document.getElementById('desktop-lang-select');
-    const mobileLangSelect = document.getElementById('mobile-lang-select');
+    // Mobile language select removed from HTML, so no need for its JS
     const langDisplay = document.getElementById('lang-display');
     const googleTranslateMeta = document.querySelector('meta[name="google"]');
 
@@ -68,11 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "en": { "name": "English", "display": "Aa" }, "es": { "name": "Español", "display": "Aa" },
         "fr": { "name": "Français", "display": "Aa" }, "de": { "name": "Deutsch", "display": "Aa" },
         "hi": { "name": "हिन्दी", "display": "आ" }, "ml": { "name": "മലയാളം", "display": "അ" }
-        // You can add many more languages here
     };
 
     function populateLanguageDropdowns() {
-        const selects = [desktopLangSelect, mobileLangSelect];
+        const selects = [desktopLangSelect]; // Only desktop select now
         selects.forEach(select => {
             if (!select) return;
             select.innerHTML = '';
@@ -104,6 +115,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     populateLanguageDropdowns();
     if (desktopLangSelect) desktopLangSelect.addEventListener('change', handleLanguageChange);
-    if (mobileLangSelect) mobileLangSelect.addEventListener('change', handleLanguageChange);
 });
-
