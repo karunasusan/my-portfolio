@@ -88,3 +88,27 @@ document.addEventListener('DOMContentLoaded', () => {
         typeEffect();
     }
 });
+
+// --- Scroll Reveal Animation for Education Timeline ---
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Add a delay based on the item's index to stagger the animation
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+                }, index * 200); // 200ms delay between each item
+
+                // Stop observing the item once it has been revealed
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1 // Trigger when 10% of the item is visible
+    });
+
+    // Observe each timeline item
+    timelineItems.forEach(item => {
+        observer.observe(item);
+    });
