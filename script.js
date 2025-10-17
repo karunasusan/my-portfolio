@@ -112,3 +112,24 @@ document.addEventListener('DOMContentLoaded', () => {
     timelineItems.forEach(item => {
         observer.observe(item);
     });
+
+    // --- Project Slideshow ---
+    const slideshow = document.querySelector('.project-slideshow');
+    if (slideshow) {
+        const slides = slideshow.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        const showNextSlide = () => {
+            // Hide the current slide
+            slides[currentSlide].classList.remove('active');
+            
+            // Determine the next slide index
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            // Show the next slide
+            slides[currentSlide].classList.add('active');
+        };
+
+        // Change slide every 30 seconds
+        setInterval(showNextSlide, 30000); // 30000 milliseconds = 30 seconds
+    }
