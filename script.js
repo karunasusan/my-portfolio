@@ -5,6 +5,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const aboutCards = document.querySelectorAll('.about-card');
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-desktop .nav-item');
+    const logo = document.querySelector('.logo-svg');
+    const easterEggText = document.getElementById('easter-egg');
+
+    // --- Easter Egg Logic ---
+    if (logo && easterEggText) {
+        logo.addEventListener('dblclick', () => {
+            if (window.innerWidth < 1024) return; // Only on desktop
+
+            logo.classList.add('hidden');
+            easterEggText.classList.add('visible');
+            
+            // Typing animation for the easter egg
+            const name = "KARUNA SUSAN BENNY";
+            let i = 0;
+            const typeWriter = () => {
+                if (i < name.length) {
+                    easterEggText.innerHTML = name.substring(0, i + 1) + '<span class="cursor"></span>';
+                    i++;
+                    setTimeout(typeWriter, 150);
+                }
+            };
+            typeWriter();
+
+            // Revert after 1 minute
+            setTimeout(() => {
+                logo.classList.remove('hidden');
+                easterEggText.classList.remove('visible');
+                easterEggText.innerHTML = '';
+            }, 60000); // 60000ms = 1 minute
+        });
+    }
 
     // --- About Card Click Logic for Mobile ---
     aboutCards.forEach(card => {
@@ -116,10 +147,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let scrollY = window.pageYOffset;
         sections.forEach(current => {
             const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 50;
+            const sectionTop = current.offsetTop - 100;
             const sectionId = current.getAttribute('id');
 
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === '#' + sectionId) {
@@ -130,5 +161,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav(); // Set initial state on page load
+    updateActiveNav();
 });
