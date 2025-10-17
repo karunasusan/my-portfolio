@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerCheckbox = document.getElementById('checkbox');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-list .nav-item');
     const aboutCards = document.querySelectorAll('.about-card');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-desktop .nav-item');
 
     // --- About Card Click Logic for Mobile ---
     aboutCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            if (card.classList.contains('active')) {
-                return;
-            }
+            if (card.classList.contains('active')) return;
             aboutCards.forEach(c => c.classList.remove('active'));
             card.classList.add('active');
         });
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Theme Toggle Functionality ---
     const desktopThemeToggle = document.getElementById('themeToggleDesktop');
     const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-
     const applyTheme = (theme) => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
@@ -48,15 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (desktopThemeToggle) desktopThemeToggle.checked = isLight;
         if (mobileThemeToggle) mobileThemeToggle.checked = isLight;
     };
-
     const toggleTheme = () => {
         const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         applyTheme(newTheme);
     };
-
     if (desktopThemeToggle) desktopThemeToggle.addEventListener('change', toggleTheme);
     if (mobileThemeToggle) mobileThemeToggle.addEventListener('change', toggleTheme);
-
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     applyTheme(savedTheme);
 
@@ -65,13 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (taglineWord) {
         const words = ["web experiences.", "creative solutions.", "intuitive interfaces."];
         let wordIndex = 0, letterIndex = 0, isDeleting = false;
-        
         function typeEffect() {
             const currentWord = words[wordIndex];
             const typeSpeed = isDeleting ? 100 : 200;
-
             taglineWord.textContent = currentWord.substring(0, letterIndex);
-
             if (!isDeleting && letterIndex < currentWord.length) {
                 letterIndex++;
             } else if (isDeleting && letterIndex > 0) {
@@ -82,33 +75,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     wordIndex = (wordIndex + 1) % words.length;
                 }
             }
-            
             setTimeout(typeEffect, isDeleting && letterIndex === 0 ? 1000 : (isDeleting ? typeSpeed : (letterIndex === currentWord.length ? 2000 : typeSpeed)));
         }
         typeEffect();
     }
-});
 
-// --- Scroll Reveal Animation for Education Timeline ---
+    // --- Scroll Reveal Animation for Education Timeline ---
     const timelineItems = document.querySelectorAll('.timeline-item');
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // Add a delay based on the item's index to stagger the animation
                 setTimeout(() => {
                     entry.target.classList.add('is-visible');
-                }, index * 200); // 200ms delay between each item
-
-                // Stop observing the item once it has been revealed
+                }, index * 200);
                 observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.1 // Trigger when 10% of the item is visible
-    });
-
-    // Observe each timeline item
+    }, { threshold: 0.1 });
     timelineItems.forEach(item => {
         observer.observe(item);
     });
@@ -118,18 +101,34 @@ document.addEventListener('DOMContentLoaded', () => {
     if (slideshow) {
         const slides = slideshow.querySelectorAll('.slide');
         let currentSlide = 0;
-
         const showNextSlide = () => {
-            // Hide the current slide
-            slides[currentSlide].classList.remove('active');
-            
-            // Determine the next slide index
-            currentSlide = (currentSlide + 1) % slides.length;
-            
-            // Show the next slide
-            slides[currentSlide].classList.add('active');
+            if (slides.length > 0) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
         };
-
-        // Change slide every 30 seconds
-        setInterval(showNextSlide, 30000); // 30000 milliseconds = 30 seconds
+        setInterval(showNextSlide, 30000);
     }
+
+    // --- Navbar Active on Scroll ---
+    const updateActiveNav = () => {
+        let scrollY = window.pageYOffset;
+        sections.forEach(current => {
+            const sectionHeight = current.offsetHeight;
+            const sectionTop = current.offsetTop - 50;
+            const sectionId = current.getAttribute('id');
+
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    };
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav(); // Set initial state on page load
+});
