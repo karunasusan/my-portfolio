@@ -2,7 +2,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageWrapper = document.getElementById('page-wrapper');
     const hamburgerCheckbox = document.getElementById('checkbox');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-list .nav-item');
-    
+    const aboutCards = document.querySelectorAll('.about-card');
+
+    // --- About Card Click Logic for Mobile ---
+    aboutCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (card.classList.contains('active')) {
+                return;
+            }
+            aboutCards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+        });
+    });
+
+    // --- Click-off functionality ---
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.about-card')) {
+            aboutCards.forEach(card => card.classList.remove('active'));
+        }
+    });
+
     // --- Mobile Menu Slide Animation ---
     hamburgerCheckbox.addEventListener('change', () => {
         pageWrapper.classList.toggle('menu-open', hamburgerCheckbox.checked);
@@ -13,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             if (hamburgerCheckbox.checked) {
                 hamburgerCheckbox.checked = false;
-                // Manually trigger the change event to ensure the class is toggled
                 hamburgerCheckbox.dispatchEvent(new Event('change'));
             }
         });
@@ -27,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         const isLight = theme === 'light';
-        desktopThemeToggle.checked = isLight;
-        mobileThemeToggle.checked = isLight;
+        if (desktopThemeToggle) desktopThemeToggle.checked = isLight;
+        if (mobileThemeToggle) mobileThemeToggle.checked = isLight;
     };
 
     const toggleTheme = () => {
@@ -36,8 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTheme(newTheme);
     };
 
-    desktopThemeToggle.addEventListener('change', toggleTheme);
-    mobileThemeToggle.addEventListener('change', toggleTheme);
+    if (desktopThemeToggle) desktopThemeToggle.addEventListener('change', toggleTheme);
+    if (mobileThemeToggle) mobileThemeToggle.addEventListener('change', toggleTheme);
 
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     applyTheme(savedTheme);
@@ -69,50 +87,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         typeEffect();
     }
-
-    // --- Language Translation Logic ---
-    const desktopLangSelect = document.getElementById('desktop-lang-select');
-    // Mobile language select removed from HTML, so no need for its JS
-    const langDisplay = document.getElementById('lang-display');
-    const googleTranslateMeta = document.querySelector('meta[name="google"]');
-
-    const languages = {
-        "en": { "name": "English", "display": "Aa" }, "es": { "name": "Español", "display": "Aa" },
-        "fr": { "name": "Français", "display": "Aa" }, "de": { "name": "Deutsch", "display": "Aa" },
-        "hi": { "name": "हिन्दी", "display": "आ" }, "ml": { "name": "മലയാളം", "display": "അ" }
-    };
-
-    function populateLanguageDropdowns() {
-        const selects = [desktopLangSelect]; // Only desktop select now
-        selects.forEach(select => {
-            if (!select) return;
-            select.innerHTML = '';
-            for (const code in languages) {
-                const option = document.createElement('option');
-                option.value = code;
-                option.textContent = languages[code].name;
-                option.dataset.display = languages[code].display;
-                select.appendChild(option);
-            }
-        });
-    }
-
-    function handleLanguageChange(event) {
-        const langCode = event.target.value;
-        const selectedOption = event.target.options[event.target.selectedIndex];
-        
-        if (langDisplay) {
-            langDisplay.textContent = selectedOption.dataset.display;
-        }
-        
-        document.documentElement.lang = langCode;
-        if (googleTranslateMeta) {
-            googleTranslateMeta.content = 'translate';
-        }
-        
-        console.log(`Language set to ${langCode}. Browser should now offer to translate.`);
-    }
-    
-    populateLanguageDropdowns();
-    if (desktopLangSelect) desktopLangSelect.addEventListener('change', handleLanguageChange);
 });
