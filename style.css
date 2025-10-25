@@ -3,13 +3,19 @@
 .page-wrapper.menu-open { transform: translateX(-280px); border-radius: 20px; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
 .page-wrapper.menu-open::before { opacity: 1; }
 
+:focus-visible {
+  outline: none; /* Remove the default outline */
+  box-shadow: 0 0 0 3px var(--primary-glow); /* Apply our new glow */
+  border-radius: 4px; /* Helps the glow look smooth on sharp corners */
+}
+
 /* --- ✨ 2. HEADER & NAVIGATION --- */
 .header { position: sticky; top: 0; z-index: 1000; width: 100%; background: var(--bg-nav); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .navbar { display: flex; align-items: center; justify-content: space-between; padding-block: 1.5rem; }
 .logo { position: relative; }
 .logo-svg { height: 3.2rem; width: auto; transition: opacity 0.3s; border-radius: 6px; }
 .logo-svg.hidden { opacity: 0; }
-.easter-egg-text { font-family: var(--font-heading); font-size: 2.4rem; position: absolute; top: 50%; left: 0; transform: translateY(-50%); opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+.easter-egg-text { font-family: var(--font-heading); font-size: 2.4rem; position: absolute; top: 50%; left: 0; transform: translateY(-50%); opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; color: var(--text-primary); }
 .easter-egg-text.visible { opacity: 1; }
 .logo-svg path:nth-child(1), .logo-svg path:nth-child(2) { fill: var(--logo-blue); }
 .logo-svg path:nth-child(3), .logo-svg path:nth-child(4) { fill: var(--logo-white); }
@@ -193,7 +199,7 @@ input:checked + .slider:before { transform: translateX(2.5rem); background-color
 .form-group { margin-bottom: 1.5rem; }
 .form-group input, .form-group textarea { width: 100%; padding: 1.5rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-family: var(--font-body); font-size: 1.6rem; }
 .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-secondary); }
-.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
 .form-group textarea { resize: vertical; min-height: 80px; }
 
 /* --- ⑭. FOOTER --- */
@@ -440,4 +446,39 @@ body.loading .page-wrapper {
     transform: scaleY(1);
     opacity: 1;
   }
+}
+
+/* --- UTILITY CLASS FOR ACCESSIBILITY --- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- ACCESSIBILITY SKIP LINK --- */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: -9999px; /* Hide it off-screen */
+  z-index: 9999; /* Ensure it's on top */
+  
+  /* Styling for when it's focused */
+  background: var(--primary);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px; /* Rounded corners */
+  font-weight: 600;
+  text-decoration: none;
+  transition: left 0.3s ease;
+}
+
+.skip-link:focus {
+  left: 2rem; 
+  top: 1.5rem;
 }

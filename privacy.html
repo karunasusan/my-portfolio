@@ -4,34 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | Karuna Susan Benny</title>
+
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <style>
-        body { padding: 4rem 2rem; }
-        .privacy-container { max-width: 800px; margin: auto; }
-        h1 { font-size: 4rem; margin-bottom: 2rem; }
-        h2 { font-size: 2.4rem; margin-top: 3rem; margin-bottom: 1rem; }
-        p { margin-bottom: 1.5rem; }
-        a { color: var(--primary); }
+        /* Styles to position the card and button */
+        body {
+            /* Add padding to account for the fixed button and space at bottom */
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Positions the "Back" button */
+        .back-to-home {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            width: fit-content; /* Ensures button is not full-width */
+        }
+
+        /* Centers the card and gives it a max-width */
+        .privacy-card {
+            max-width: 800px;
+            margin: auto;
+        }
+        
+        /* Styles for the text inside the card */
+        .card-content {
+            padding: 2.5rem 4rem; /* More padding for text */
+            text-align: left; /* Default text alignment */
+        }
+        .card-content h1 {
+            font-family: var(--font-heading);
+            font-size: 3.2rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+        .card-content h2 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        .card-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        .card-content a {
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .card-content a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <div class="privacy-container">
-        <h1>Privacy Policy</h1>
-        <p>This privacy policy explains how your information is handled when you use this portfolio website.</p>
 
-        <h2>Information Collection and Use</h2>
-        <p>This is a static portfolio website. It does not collect any personal data, use cookies, or track you in any way. Your visit is completely anonymous.</p>
+    <a href="index.html" class="btn btn-secondary back-to-home">
+        <i class='bx bx-left-arrow-alt'></i>
+        <span>Back to Home</span>
+    </a>
 
-        <h2>Contact Form</h2>
-        <p>If you choose to use the contact form, the information you provide (your name, email address, and message) will be sent directly to me to respond to your inquiry. This information is handled via Netlify Forms and is not stored on this website's server. It will not be used for marketing purposes or shared with third parties.</p>
-
-        <h2>Third-Party Links</h2>
-        <p>This website may contain links to other websites (like GitHub, LinkedIn, etc.). Please be aware that I am not responsible for the content or privacy practices of such other sites. I encourage you to be aware when you leave this site and to read the privacy statements of any other site that collects personally identifiable information.</p>
-
-        <h2>Changes to This Privacy Policy</h2>
-        <p>This Privacy Policy may be updated from time to time. Any changes will be posted on this page. This policy is effective as of October 2025.</p>
-
-        <a href="index.html">← Go Back to Portfolio</a>
+    <div class="home-card privacy-card">
+        <div class="card-content">
+            <h1>Privacy Policy</h1>
+            <p>This privacy policy explains how your information is handled when you use this portfolio website.</p>
+    
+            <h2>Information Collection and Use</h2>
+            <p>This is a static portfolio website. It does not collect any personal data, use cookies, or track you in any way. Your visit is completely anonymous.</p>
+    
+            <h2>Contact Form</h2>
+            <p>If you choose to use the contact form, the information you provide (your name, email address, and message) will be sent directly to me to respond to your inquiry. This information is handled via Netlify Forms and is not stored on this website's server. It will not be used for marketing purposes or shared with third parties.</p>
+    
+            <h2>Third-Party Links</h2>
+            <p>This website may contain links to other websites (like GitHub, LinkedIn, etc.). Please be aware that I am not responsible for the content or privacy practices of such other sites. I encourage you to be aware when you leave this site and to read the privacy statements of any other site that collects personally identifiable information.</p>
+    
+            <h2>Changes to This Privacy Policy</h2>
+            <p>This Privacy Policy may be updated from time to time. Any changes will be posted on this page. This policy is effective as of October 2025.</p>
+            
+            </div>
     </div>
+
 </body>
 </html>

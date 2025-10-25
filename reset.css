@@ -6,7 +6,8 @@
 }
 
 html[data-theme='dark'] {
-    --primary: #71B7FB;
+    --primary: #007cb7;
+    --primary-glow: rgba(113, 183, 251, 0.5); /* ADD THIS LINE */
     --bg: #000000;
     --bg-alt: #1b1f23;
     --bg-nav: rgba(27, 31, 35, 0.8);
@@ -19,6 +20,7 @@ html[data-theme='dark'] {
 
 html[data-theme='light'] {
     --primary: #71B7FB;
+    --primary-glow: rgba(113, 183, 251, 0.7); /* ADD THIS LINE */
     --bg: #f4f2ee;
     --bg-alt: #ffffff;
     --bg-nav: rgba(255, 255, 255, 0.8);
