@@ -162,4 +162,156 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.addEventListener('scroll', updateActiveNav);
     updateActiveNav();
+
+    // --- START: Form Validation Logic ---
+    const contactForm = document.forms['contact'];
+    
+    if (contactForm) {
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const submitBtn = document.getElementById('submit-btn');
+
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const messageError = document.getElementById('message-error');
+
+        // Simple regex for email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // An object to track the validity of each field
+        const validationState = {
+            name: false,
+            email: false,
+            message: false
+        };
+
+        // This function checks the state and enables/disables the submit button
+        const checkFormValidity = () => {
+            if (validationState.name && validationState.email && validationState.message) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        };
+
+        // --- Validation Functions ---
+        const validateName = () => {
+            const value = nameInput.value.trim();
+            if (value.length === 0) {
+                nameError.textContent = "Name is required.";
+                nameError.classList.add('visible');
+                nameInput.classList.add('error');
+                validationState.name = false;
+            } else if (value.length < 2) {
+                nameError.textContent = "Name must be at least 2 characters.";
+                nameError.classList.add('visible');
+                nameInput.classList.add('error');
+                validationState.name = false;
+            } else {
+                nameError.textContent = "";
+                nameError.classList.remove('visible');
+                nameInput.classList.remove('error');
+                validationState.name = true;
+            }
+            checkFormValidity();
+        };
+
+        const validateEmail = () => {
+            const value = emailInput.value.trim();
+            if (value.length === 0) {
+                emailError.textContent = "Email is required.";
+                emailError.classList.add('visible');
+                emailInput.classList.add('error');
+                validationState.email = false;
+            } else if (!emailRegex.test(value)) {
+                emailError.textContent = "Please enter a valid email format.";
+                emailError.classList.add('visible');
+                emailInput.classList.add('error');
+                validationState.email = false;
+            } else {
+                emailError.textContent = "";
+                emailError.classList.remove('visible');
+                emailInput.classList.remove('error');
+                validationState.email = true;
+            }
+            checkFormValidity();
+        };
+
+        const validateMessage = () => {
+            const value = messageInput.value.trim();
+            if (value.length === 0) {
+                messageError.textContent = "Message is required.";
+                messageError.classList.add('visible');
+                messageInput.classList.add('error');
+                validationState.message = false;
+            } else if (value.length < 10) {
+                messageError.textContent = "Message must be at least 10 characters.";
+                messageError.classList.add('visible');
+                messageInput.classList.add('error');
+                validationState.message = false;
+            } else {
+                messageError.textContent = "";
+                messageError.classList.remove('visible');
+                messageInput.classList.remove('error');
+                validationState.message = true;
+            }
+            checkFormValidity();
+        };
+
+        // --- Add Event Listeners ---
+        // We use 'input' to validate as the user types
+        nameInput.addEventListener('input', validateName);
+        emailInput.addEventListener('input', validateEmail);
+        messageInput.addEventListener('input', validateMessage);
+
+        // We also check on 'blur' (when user clicks away) 
+        // in case they just click past a field
+        nameInput.addEventListener('blur', validateName);
+        emailInput.addEventListener('blur', validateEmail);
+        messageInput.addEventListener('blur', validateMessage);
+    }
+    // --- END: Form Validation Logic ---
+
+    // --- START: Scroll-to-Top Button Logic ---
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    if (scrollTopBtn) {
+        // Show or hide the button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                scrollTopBtn.style.display = "flex";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        });
+
+        // Scroll to top when clicked
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+    // --- END: Scroll-to-Top Button Logic ---
 });
+
+// --- START: Loader Logic ---
+// 1. Add 'loading' class to body to hide content initially
+document.body.classList.add('loading');
+
+// 2. Get the loader element
+const loader = document.getElementById('loader');
+
+// 3. Listen for when the whole page (images, etc.) is loaded
+window.onload = () => {
+    // 4. Hide the loader
+    loader.classList.add('hidden');
+    // 5. Show the main content
+    document.body.classList.remove('loading');
+};
+// --- END: Loader Logic ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    const pageWrapper = document.getElementById('page-wrapper');});

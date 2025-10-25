@@ -222,19 +222,32 @@ input:checked + .slider:before { transform: translateX(2.5rem); background-color
     .page-wrapper.menu-open { transform: none; border-radius: 0; box-shadow: none; }
     .page-wrapper.menu-open::before { opacity: 0; }
 }
-/* Scroll to Top Button Styles */
-.button {
+
+/* --- ⑮. DESKTOP & RESPONSIVE STYLES --- */
+@media (max-width: 1023px) { .sidebar-area { display: none; } }
+
+@media (min-width: 1024px) {
+    .nav-desktop { display: flex; }
+    .hamburger-container { display: none; }
+    .mobile-nav { display: none; }
+    .home-grid { grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); }
+    .page-wrapper.menu-open { transform: none; border-radius: 0; box-shadow: none; }
+    .page-wrapper.menu-open::before { opacity: 0; }
+}
+
+/* --- ⑯. SCROLL TO TOP BUTTON --- */
+/* Base button style (squircle) */
+.scroll-to-top-btn {
   width: 50px;
   height: 50px;
-  border-radius: 20%;
-  background-color: #1b4552;
-  border: none;
-  font-weight: 300;
-  display: flex;
+  border-radius: 12px; /* Changed from 50% to 12px for squircle */
+  background-color: var(--bg-alt); /* Use theme variable */
+  border: 1px solid var(--border-color); /* Add a subtle border */
+  font-weight: 600;
+  display: none; /* Hidden by default, JS will show it */
   align-items: center;
   justify-content: center;
-  border: 4px double #e9e9e9;
-  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition-duration: 0.3s;
   overflow: hidden;
@@ -242,43 +255,189 @@ input:checked + .slider:before { transform: translateX(2.5rem); background-color
   bottom: 30px;
   right: 30px;
   z-index: 1000;
-  display: none; /* hidden by default */
 }
 
-.svgIcon {
+.scroll-to-top-btn .svgIcon {
   width: 12px;
   transition-duration: 0.3s;
 }
 
-.svgIcon path {
-  fill: #e9e9e9;
+.scroll-to-top-btn .svgIcon path {
+  fill: var(--text-primary); /* Use theme variable */
 }
 
-.button:hover {
-  width: 140px;
-  border-radius: 15px;
-  transition-duration: 0.3s;
-  background-color: #1b4552;
-  align-items: center;
-}
-
-.button:hover .svgIcon {
-  transition-duration: 0.3s;
-  transform: translateY(-200%);
-}
-
-.button::before {
+/* Text style (hidden by default) */
+.scroll-to-top-btn .button-text {
   position: absolute;
-  bottom: -20px;
-  content: "Back to Top";
-  color: #e9e9e9;
-  font-size: 0px;
+  left: 35px; /* Position text to the left */
+  color: var(--text-primary);
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.button:hover::before {
-  font-family: Garet, sans-serif;
-  font-size: 15px;
+/* Apply hover effects ONLY on devices that can hover (not mobile) */
+@media (hover: hover) {
+  .scroll-to-top-btn:hover {
+    width: 140px; /* Expand width */
+    border-radius: 12px; /* Stay a rounded square */
+    background-color: var(--primary); /* Use theme variable */
+    justify-content: flex-start; /* Align content to the left */
+    padding-left: 18px; /* Add padding for the text */
+  }
+
+  /* Move icon out of the way */
+  .scroll-to-top-btn:hover .svgIcon {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
+
+  /* Fade in the text */
+  .scroll-to-top-btn:hover .button-text {
+    opacity: 1;
+  }
+}
+
+/* --- ⑰. FORM VALIDATION STYLES --- */
+.form-group {
+  position: relative; /* Needed to position error message */
+  /* Reserve space for the error message */
+  padding-bottom: 2.2rem; 
+  margin-bottom: 0.5rem; /* Adjust spacing */
+}
+
+.error-message {
+  position: absolute; /* Position it right below the input */
+  bottom: 0;
+  left: 2px;
+  font-size: 1.4rem;
+  color: #ff5c5c; /* A clear red for errors */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  height: 2rem; /* Reserve space */
+}
+
+/* Class to show the error message */
+.error-message.visible {
   opacity: 1;
-  bottom: unset;
-  transition-duration: 0.3s;
+}
+
+/* Style for the input/textarea when it's invalid */
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #ff5c5c; /* Red border on error */
+}
+
+/* Style for the disabled submit button */
+.btn:disabled {
+  background-color: var(--text-secondary);
+  border-color: var(--text-secondary);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  filter: none; /* Disable hover brightness */
+  background-color: var(--text-secondary); /* Keep it gray on hover */
+  color: white;
+}
+
+body.loading .page-wrapper {
+  opacity: 0;
+}
+
+/* Full-screen wrapper for the loader */
+.loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg); /* Match your site's background */
+  z-index: 9999;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+/* Class to fade out the loader */
+.loader-wrapper.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Your loader styles (syntax corrected) */
+.loader-container {
+  --uib-size: 50px; /* Made it a bit bigger */
+  --uib-color: var(--primary); /* Linked to your theme color */
+  --uib-speed: 1s;
+  --uib-stroke: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: var(--uib-size);
+  width: var(--uib-size);
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  left: calc(50% - var(--uib-stroke) / 2);
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  width: var(--uib-stroke);
+}
+
+.line::before {
+  content: '';
+  height: 22%;
+  width: 100%;
+  border-radius: calc(var(--uib-stroke) / 2);
+  background-color: var(--uib-color);
+  animation: pulse calc(var(--uib-speed)) ease-in-out infinite;
+  transition: background-color 0.3s ease;
+  transform-origin: center bottom;
+}
+
+/* Corrected CSS - replaced SASS nesting */
+.line:nth-child(1) { transform: rotate(calc(360deg / -12 * 1)); }
+.line:nth-child(1)::before { animation-delay: calc(var(--uib-speed) / -12 * 1); }
+.line:nth-child(2) { transform: rotate(calc(360deg / -12 * 2)); }
+.line:nth-child(2)::before { animation-delay: calc(var(--uib-speed) / -12 * 2); }
+.line:nth-child(3) { transform: rotate(calc(360deg / -12 * 3)); }
+.line:nth-child(3)::before { animation-delay: calc(var(--uib-speed) / -12 * 3); }
+.line:nth-child(4) { transform: rotate(calc(360deg / -12 * 4)); }
+.line:nth-child(4)::before { animation-delay: calc(var(--uib-speed) / -12 * 4); }
+.line:nth-child(5) { transform: rotate(calc(360deg / -12 * 5)); }
+.line:nth-child(5)::before { animation-delay: calc(var(--uib-speed) / -12 * 5); }
+.line:nth-child(6) { transform: rotate(calc(360deg / -12 * 6)); }
+.line:nth-child(6)::before { animation-delay: calc(var(--uib-speed) / -12 * 6); }
+.line:nth-child(7) { transform: rotate(calc(360deg / -12 * 7)); }
+.line:nth-child(7)::before { animation-delay: calc(var(--uib-speed) / -12 * 7); }
+.line:nth-child(8) { transform: rotate(calc(360deg / -12 * 8)); }
+.line:nth-child(8)::before { animation-delay: calc(var(--uib-speed) / -12 * 8); }
+.line:nth-child(9) { transform: rotate(calc(360deg / -12 * 9)); }
+.line:nth-child(9)::before { animation-delay: calc(var(--uib-speed) / -12 * 9); }
+.line:nth-child(10) { transform: rotate(calc(360deg / -12 * 10)); }
+.line:nth-child(10)::before { animation-delay: calc(var(--uib-speed) / -12 * 10); }
+.line:nth-child(11) { transform: rotate(calc(360deg / -12 * 11)); }
+.line:nth-child(11)::before { animation-delay: calc(var(--uib-speed) / -12 * 11); }
+.line:nth-child(12) { transform: rotate(calc(360deg / -12 * 12)); }
+.line:nth-child(12)::before { animation-delay: calc(var(--uib-speed) / -12 * 12); }
+
+
+@keyframes pulse {
+  0%,
+  80%,
+  100% {
+    transform: scaleY(0.75);
+    opacity: 0;
+  }
+  20% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
