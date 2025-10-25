@@ -1,79 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Not Found | Karuna Susan Benny</title>
 
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
 
     <style>
-        /* Styles to center the 404 card */
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 4rem 2rem;
+        text-align: center;
+      }
 
-        /* UPDATED: This class now ONLY handles positioning. 
-           The .btn styles from style.css handle the rest. */
-        .back-to-home {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            width: fit-content; /* Ensures button is not full-width */
-        }
+      .back-to-home {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        width: fit-content;
+      }
 
-        /* Styles for the card content */
-        .card-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 4rem 2rem; /* Extra padding */
-        }
-        .error-image {
-            max-width: 100%;
-            width: 300px; /* Adjust as needed */
-            height: auto;
-            margin-bottom: 3rem;
-        }
-        h1 {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-        p {
-            color: var(--text-secondary);
-            max-width: 35ch;
-        }
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 4rem 2rem; /* Extra padding */
+      }
+      .error-image {
+        max-width: 100%;
+        width: 300px; /* Adjust as needed */
+        height: auto;
+        margin-bottom: 3rem;
+      }
+      h1 {
+        font-family: var(--font-heading);
+        font-size: 3rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+      }
+      p {
+        color: var(--text-secondary);
+        max-width: 35ch;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <a href="index.html" class="btn btn-secondary back-to-home">
-        <i class='bx bx-left-arrow-alt'></i>
-        <span>Back to Home</span>
+      <i class="bx bx-left-arrow-alt"></i>
+      <span>Back to Home</span>
     </a>
 
     <div class="home-card">
-        <div class="card-content">
-            
-            <img src="assets/images/404.svg" 
-                 alt="Page not found" 
-                 class="error-image">
-            
-            <h1>Page Not Found</h1>
-            <p>Oops! Looks like the page you were looking for doesn't exist.</p>
-        </div>
-    </div>
+      <div class="card-content">
+        <img
+          src="assets/images/404.svg"
+          alt="Page not found"
+          class="error-image"
+        />
 
-</body>
+        <h1>Page Not Found</h1>
+        <p>Oops! Looks like the page you were looking for doesn't exist.</p>
+      </div>
+    </div>
+  </body>
 </html>

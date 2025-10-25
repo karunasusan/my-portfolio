@@ -10,9 +10,9 @@ This project is a single-page portfolio designed to highlight my journey as a fr
 
 ## 🛠️ Tech Stack (Planned)
 
-* **HTML5** - For semantic and accessible structure.
-* **CSS3** - For modern styling, including Flexbox, Grid, and custom properties.
-* **JavaScript (ES6+)** - For interactive elements and functionality.
+- **HTML5** - For semantic and accessible structure.
+- **CSS3** - For modern styling, including Flexbox, Grid, and custom properties.
+- **JavaScript (ES6+)** - For interactive elements and functionality.
 
 ## 🚀 Current Status
 
@@ -20,9 +20,9 @@ The project is in the initial development phase. The basic structure and styling
 
 ## 🌟 Future Goals
 
-* Implement a fully responsive, mobile-first design.
-* Add a project section with cards linking to live demos and source code.
-* Incorporate subtle animations and transitions for a better user experience.
-* Optimize for performance and accessibility (a11y).
+- Implement a fully responsive, mobile-first design.
+- Add a project section with cards linking to live demos and source code.
+- Incorporate subtle animations and transitions for a better user experience.
+- Optimize for performance and accessibility (a11y).
 
 Feel free to check back soon to see the progress!
