@@ -147,19 +147,71 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(item);
   });
 
-  const slideshow = document.querySelector(".project-slideshow");
-  if (slideshow) {
+  // --- PROJECT SLIDESHOW LOGIC ---
+  document.querySelectorAll(".project-slideshow").forEach((slideshow) => {
     const slides = slideshow.querySelectorAll(".slide");
+    const dotsContainer = slideshow.querySelector(".slide-dots");
+    const prevBtn = slideshow.querySelector(".prev-slide");
+    const nextBtn = slideshow.querySelector(".next-slide");
     let currentSlide = 0;
-    const showNextSlide = () => {
-      if (slides.length > 0) {
-        slides[currentSlide].classList.remove("active");
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add("active");
+
+    if (slides.length === 0) return;
+
+    // Create dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.classList.add("slide-dot");
+      if (i === 0) dot.classList.add("active");
+      dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
+      dot.addEventListener("click", () => {
+        showSlide(i);
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = slideshow.querySelectorAll(".slide-dot");
+
+    function showSlide(index) {
+      if (index >= slides.length) {
+        index = 0;
+      } else if (index < 0) {
+        index = slides.length - 1;
       }
-    };
-    setInterval(showNextSlide, 30000);
-  }
+
+      // Update slides
+      slides.forEach((slide) => slide.classList.remove("active"));
+      slides[index].classList.add("active");
+
+      // Update dots
+      dots.forEach((dot) => dot.classList.remove("active"));
+      dots[index].classList.add("active");
+
+      currentSlide = index;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      showSlide(currentSlide - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      showSlide(currentSlide + 1);
+    });
+
+    let autoSlide = setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 5000); // 5-second interval
+
+    // Stop auto-slide on hover
+    slideshow.addEventListener("mouseenter", () => clearInterval(autoSlide));
+    slideshow.addEventListener("mouseleave", () => {
+      autoSlide = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 5000);
+    });
+
+    // Initialize first slide
+    showSlide(0);
+  });
 
   const updateActiveNav = () => {
     let scrollY = window.pageYOffset;

@@ -289,9 +289,14 @@ html[data-theme="light"] .mobile-nav .footer-card {
 }
 
 .theme-toggle {
-  color: var(--text-primary);
+  color: var(--text-secondary);
   width: 2.2rem;
   height: 2.2rem;
+  transition: var(--transition-smooth);
+}
+
+.nav-item.theme-toggle-container:hover .theme-toggle {
+  color: var(--primary);
 }
 
 .st-sunMoonThemeToggleBtn {
@@ -693,6 +698,7 @@ input:checked + .slider:before {
   flex-grow: 1;
   height: 1px;
   background-color: var(--border-color);
+  opacity: 0.5;
 }
 
 .separator-with-text .text {
@@ -817,6 +823,7 @@ input:checked + .slider:before {
 @media (min-width: 1024px) {
   .education-grid {
     grid-template-columns: 2.3fr 1fr;
+    align-self: start;
   }
 }
 
@@ -984,6 +991,9 @@ input:checked + .slider:before {
   .project-card {
     grid-template-columns: 3fr 2fr;
   }
+  .project-slideshow {
+    min-height: 200px;
+  }
 }
 
 .project-slideshow {
@@ -1105,7 +1115,7 @@ input:checked + .slider:before {
 }
 
 .email-link:hover i {
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
 }
 
 .contact-quote {
@@ -1344,7 +1354,7 @@ input:checked + .slider:before {
 }
 
 /* This hides the button when the mobile menu is open */
-.page-wrapper.menu-open + .scroll-to-top-btn {
+.page-wrapper.menu-open ~ .scroll-to-top-btn {
   display: none;
 }
 
@@ -1572,5 +1582,93 @@ body.loading .page-wrapper {
   20% {
     transform: scaleY(1);
     opacity: 1;
+  }
+}
+/* --- PROJECT SLIDESHOW CONTROLS --- */
+.project-slideshow {
+  position: relative;
+  width: 100%;
+  min-height: 250px;
+  overflow: hidden; /* Add overflow hidden */
+}
+
+.project-slideshow .slide {
+  /* ... existing styles ... */
+  /* Change transition for slide effect */
+  transition: opacity 0.6s ease-in-out;
+}
+
+.slide-arrow {
+  display: none; /* Hide by default */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.slide-arrow.prev-slide {
+  left: 1rem;
+}
+
+.slide-arrow.next-slide {
+  right: 1rem;
+}
+
+.slide-dots {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.8rem;
+  z-index: 10;
+}
+
+.slide-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.slide-dot.active {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Show arrows only on desktop */
+@media (min-width: 768px) {
+  .slide-arrow {
+    display: flex;
+  }
+}
+
+/* Hide dots on desktop */
+@media (min-width: 768px) {
+  .slide-dots {
+    display: none;
+  }
+}
+
+/* Responsive slideshow height (from issue #6) */
+@media (max-width: 767px) {
+  .project-slideshow {
+    min-height: 200px;
   }
 }
