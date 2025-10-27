@@ -38,6 +38,24 @@
     <link rel="icon" href="assets/icons/favicon.ico" sizes="any" />
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
 
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/icons/favicon-16x16.png"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -54,8 +72,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="css/style.min.css" />
 
     <script type="application/ld+json">
       {
@@ -110,7 +127,7 @@
       </div>
     </div>
 
-    <nav class="mobile-nav" id="mobile-nav">
+    <nav class="mobile-nav" id="mobile-nav" role="navigation">
       <div class="mobile-nav-list">
         <a href="#home" class="nav-item active"
           ><i class="bx bxs-home-alt"></i><span>Home</span></a
@@ -149,7 +166,7 @@
             <img src="assets/icons/favicon.svg" alt="Logo" class="logo-svg" />
             <span id="easter-egg" class="easter-egg-text"></span>
           </a>
-          <nav class="nav-desktop">
+          <nav class="nav-desktop" role="navigation">
             <a href="#home" class="nav-item active"
               ><i class="bx bxs-home-alt"></i><span>Home</span></a
             >
@@ -247,7 +264,7 @@
         </div>
       </header>
 
-      <main class="container">
+      <main class="container" role="main">
         <section class="home-section" id="home">
           <div class="home-grid">
             <div class="main-content-area">
@@ -532,7 +549,7 @@
                       /></a>
                       <div class="timeline-details">
                         <h4 class="timeline-institution">
-                          Grama Panchayat Higer Secondary School, Kulanada
+                          Grama Panchayat Higher Secondary School, Kulanada
                         </h4>
                         <p class="timeline-course">
                           12th Grade, Computer Commerce
@@ -790,7 +807,11 @@
                         placeholder="Name"
                         required
                       />
-                      <div class="error-message" id="name-error"></div>
+                      <div
+                        class="error-message"
+                        id="name-error"
+                        aria-live="polite"
+                      ></div>
                     </div>
                     <div class="form-group">
                       <label for="email" class="visually-hidden">Email</label>
@@ -801,7 +822,11 @@
                         placeholder="Email"
                         required
                       />
-                      <div class="error-message" id="email-error"></div>
+                      <div
+                        class="error-message"
+                        id="email-error"
+                        aria-live="polite"
+                      ></div>
                     </div>
                     <div class="form-group">
                       <label for="message" class="visually-hidden"
@@ -814,7 +839,11 @@
                         placeholder="Message"
                         required
                       ></textarea>
-                      <div class="error-message" id="message-error"></div>
+                      <div
+                        class="error-message"
+                        id="message-error"
+                        aria-live="polite"
+                      ></div>
                     </div>
                     <button
                       type="submit"
@@ -832,7 +861,7 @@
         </section>
       </main>
 
-      <footer class="footer">
+      <footer class="footer" role="contentinfo">
         <div class="footer-content container">
           <p class="copyright">
             &copy; 2025 Karuna Susan Benny. All Rights Reserved.
@@ -842,7 +871,7 @@
       </footer>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="js/script.min.js" defer></script>
 
     <button class="scroll-to-top-btn" id="scrollTopBtn" title="Back to Top">
       <svg class="svgIcon" viewBox="0 0 384 512">

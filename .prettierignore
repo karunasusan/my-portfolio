@@ -1,3 +1,4 @@
 # Ignore minified files
 script.min.js
 style.min.css
+main.min.css
