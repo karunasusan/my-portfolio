@@ -83,6 +83,14 @@
   </head>
 
   <body>
+    <div class="hamburger-container">
+      <input id="checkbox" type="checkbox" />
+      <label class="toggle" for="checkbox">
+        <div id="bar1" class="bars"></div>
+        <div id="bar2" class="bars"></div>
+        <div id="bar3" class="bars"></div>
+      </label>
+    </div>
     <a href="#home" class="skip-link">Skip to home</a>
 
     <div class="loader-wrapper" id="loader">
@@ -236,14 +244,6 @@
               <span>Theme</span>
             </div>
           </nav>
-          <div class="hamburger-container">
-            <input id="checkbox" type="checkbox" />
-            <label class="toggle" for="checkbox">
-              <div id="bar1" class="bars"></div>
-              <div id="bar2" class="bars"></div>
-              <div id="bar3" class="bars"></div>
-            </label>
-          </div>
         </div>
       </header>
 
@@ -627,51 +627,70 @@
               <h2 class="section-title">Projects</h2>
               <div class="project-card">
                 <div class="project-slideshow" data-project="1">
+                  <button
+                    class="slide-arrow prev-slide desktop-arrow"
+                    title="Previous Image"
+                  >
+                    <i class="bx bx-chevron-left"></i>
+                  </button>
+                  <button
+                    class="slide-arrow next-slide desktop-arrow"
+                    title="Next Image"
+                  >
+                    <i class="bx bx-chevron-right"></i>
+                  </button>
                   <img
-                    src="/assets/images/inv1.webp"
+                    src="assets/images/inv1.webp"
                     alt="Project Screenshot 1"
                     class="slide active"
                     loading="lazy"
                   />
                   <img
-                    src="/assets/images/inv2.webp"
+                    src="assets/images/inv2.webp"
                     alt="Project Screenshot 2"
                     class="slide"
                     loading="lazy"
                   />
                   <img
-                    src="/assets/images/inv3.webp"
+                    src="assets/images/inv3.webp"
                     alt="Project Screenshot 3"
                     class="slide"
                     loading="lazy"
                   />
                   <img
-                    src="/assets/images/inv4.webp"
+                    src="assets/images/inv4.webp"
                     alt="Project Screenshot 4"
                     class="slide"
                     loading="lazy"
                   />
                   <img
-                    src="/assets/images/inv5.webp"
+                    src="assets/images/inv5.webp"
                     alt="Project Screenshot 5"
                     class="slide"
                     loading="lazy"
                   />
                   <img
-                    src="/assets/images/inv6.webp"
+                    src="assets/images/inv6.webp"
                     alt="Project Screenshot 6"
                     class="slide"
                     loading="lazy"
                   />
-
-                  <button class="slide-arrow prev-slide" title="Previous Image">
+                </div>
+                <div class="slide-nav-mobile">
+                  <button
+                    class="slide-arrow prev-slide mobile-arrow"
+                    title="Previous Image"
+                  >
                     <i class="bx bx-chevron-left"></i>
                   </button>
-                  <button class="slide-arrow next-slide" title="Next Image">
+                  <button
+                    class="slide-arrow next-slide mobile-arrow"
+                    title="Next Image"
+                  >
                     <i class="bx bx-chevron-right"></i>
                   </button>
-                  <div class="slide-dots"></div>
                 </div>
+                <div class="slide-dots"></div>
                 <div class="project-details">
                   <h3 class="project-title">Inventory Management System</h3>
                   <p class="project-description">
@@ -726,7 +745,7 @@
                       ><i class="bxl bx-linkedin-square"></i
                     ></a>
                     <a
-                      href="https.github.com/karunasusan"
+                      href="https://github.com/karunasusan"
                       target="_blank"
                       rel="noopener noreferrer"
                       ><i class="bxl bx-github"></i

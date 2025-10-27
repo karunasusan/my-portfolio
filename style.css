@@ -3,7 +3,8 @@
 .page-wrapper {
   position: relative;
   z-index: 100;
-  transition: transform 0.4s ease-in-out, border-radius 0.4s;
+  transition: transform 0.4s ease-in-out, border-radius 0.4s,
+    filter 0.4s ease-in-out; /* Added filter */
   background-color: var(--bg);
 }
 
@@ -14,23 +15,20 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out;
-  z-index: 10;
-  pointer-events: none;
+  /* background: rgba(0, 0, 0, 0.5); */ /* Removed */
+  /* opacity: 0; */ /* Removed */
+  /* transition: opacity 0.4s ease-in-out; */ /* Removed */
+  z-index: 10; /* Keep for potential layering needs */
+  pointer-events: none; /* Keep */
 }
 
 .page-wrapper.menu-open {
   transform: translateX(-280px);
   border-radius: 20px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  filter: blur(4px); /* Add blur effect - adjust value as needed */
+  overflow: hidden; /* Prevent potential scrollbars or edge issues */
 }
-
-.page-wrapper.menu-open::before {
-  opacity: 1;
-}
-
 /* Global focus "glow" style */
 :focus-visible {
   outline: none;
@@ -232,9 +230,12 @@ html[data-theme="light"] .mobile-nav .footer-card {
 
 /* --- 🍔 4. ANIMATED HAMBURGER MENU --- */
 .hamburger-container {
-  display: block;
-  z-index: 5000;
-  position: relative;
+  display: none; /* Hide by default */
+  position: fixed; /* Keep it fixed on screen */
+  top: 2rem; /* Adjust vertical position */
+  right: 2rem; /* Adjust horizontal position */
+  z-index: 5000; /* Keep it above other elements */
+  /* 'position: relative' is removed */
 }
 
 #checkbox {
@@ -289,12 +290,13 @@ html[data-theme="light"] .mobile-nav .footer-card {
 }
 
 .theme-toggle {
-  color: var(--text-secondary);
+  color: var(--text-secondary); /* Use secondary color like other nav items */
   width: 2.2rem;
   height: 2.2rem;
-  transition: var(--transition-smooth);
+  transition: var(--transition-smooth); /* Added transition */
 }
 
+/* Added hover state */
 .nav-item.theme-toggle-container:hover .theme-toggle {
   color: var(--primary);
 }
@@ -698,7 +700,7 @@ input:checked + .slider:before {
   flex-grow: 1;
   height: 1px;
   background-color: var(--border-color);
-  opacity: 0.5;
+  opacity: 0.5; /* Ensure visibility */
 }
 
 .separator-with-text .text {
@@ -811,7 +813,7 @@ input:checked + .slider:before {
 .education-grid {
   display: grid;
   gap: 2.5rem;
-  align-items: stretch;
+  align-items: stretch; /* Default align */
 }
 
 .sidebar-column {
@@ -823,7 +825,13 @@ input:checked + .slider:before {
 @media (min-width: 1024px) {
   .education-grid {
     grid-template-columns: 2.3fr 1fr;
-    align-self: start;
+  }
+  .education-card {
+    align-self: start; /* Override stretch on desktop */
+  }
+  .hamburger-container,
+  .mobile-nav {
+    display: none;
   }
 }
 
@@ -880,6 +888,7 @@ input:checked + .slider:before {
   align-items: center;
   gap: 1.5rem;
   width: 100%;
+  /* Height is auto by default */
 }
 
 .timeline-logo-link {
@@ -987,19 +996,11 @@ input:checked + .slider:before {
   margin-bottom: 2.5rem;
 }
 
-@media (min-width: 768px) {
-  .project-card {
-    grid-template-columns: 3fr 2fr;
-  }
-  .project-slideshow {
-    min-height: 200px;
-  }
-}
-
 .project-slideshow {
   position: relative;
   width: 100%;
-  min-height: 250px;
+  min-height: 250px; /* Default min-height */
+  overflow: hidden;
 }
 
 .project-slideshow .slide {
@@ -1010,7 +1011,7 @@ input:checked + .slider:before {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1.5s ease-in-out;
+  transition: opacity 0.6s ease-in-out; /* Adjusted transition */
 }
 
 .project-slideshow .slide.active {
@@ -1059,6 +1060,54 @@ input:checked + .slider:before {
 
 .view-more-btn {
   width: 100%;
+}
+
+/* --- PROJECT SLIDESHOW CONTROLS --- */
+
+/* Mobile Arrow Styles (Pills) */
+.slide-arrow {
+  display: flex; /* Make visible by default */
+  background: var(--bg-alt); /* Use card background */
+  color: var(--text-primary); /* Use primary text color */
+  border: 1px solid var(--border-color); /* Add border */
+  flex-grow: 1; /* Make buttons share space */
+  height: 4rem; /* Set height */
+  font-size: 2.5rem; /* Adjust icon size */
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem; /* Add some padding */
+}
+
+.slide-arrow:hover {
+  background: var(--primary); /* Hover background */
+  color: white; /* Hover text color */
+  border-color: var(--primary); /* Hover border color */
+}
+
+/* Mobile Arrow Container */
+.slide-nav-mobile {
+  display: flex; /* Arrange buttons side-by-side */
+  width: 100%; /* Take full width */
+  margin-top: 0.5rem; /* Space above buttons */
+}
+
+.slide-nav-mobile .prev-slide {
+  border-radius: 2rem 0 0 2rem; /* Pill shape left */
+}
+
+.slide-nav-mobile .next-slide {
+  border-radius: 0 2rem 2rem 0; /* Pill shape right */
+}
+
+/* Hide desktop arrows initially */
+.desktop-arrow {
+  display: none;
+}
+
+.slide-dots {
+  display: none; /* Hide dots container */
 }
 
 /* --- ⑬. CONTACT SECTION --- */
@@ -1115,7 +1164,7 @@ input:checked + .slider:before {
 }
 
 .email-link:hover i {
-  transform: rotate(45deg);
+  transform: rotate(45deg); /* Corrected rotation */
 }
 
 .contact-quote {
@@ -1182,7 +1231,9 @@ input:checked + .slider:before {
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  position: relative; /* Needed for error message positioning */
+  padding-bottom: 2.2rem; /* Space for error message */
+  margin-bottom: 0.5rem; /* Original margin */
 }
 
 .form-group input,
@@ -1249,6 +1300,9 @@ input:checked + .slider:before {
   .sidebar-area {
     display: none;
   }
+  .hamburger-container {
+    display: block;
+  }
 }
 
 @media (max-width: 767px) {
@@ -1274,6 +1328,7 @@ input:checked + .slider:before {
   .timeline-card {
     flex-direction: column;
     align-items: flex-start;
+    height: auto; /* Ensure height is auto on mobile */
   }
 
   .timeline-period {
@@ -1283,6 +1338,60 @@ input:checked + .slider:before {
 
   .timeline-details {
     width: 100%;
+  }
+
+  /* Responsive slideshow height */
+  .project-slideshow {
+    min-height: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  .project-card {
+    grid-template-columns: 3fr 2fr;
+  }
+  /* Fix for timeline card height on desktop */
+  .timeline-card {
+    height: 120px;
+    padding: 1.5rem; /* Ensure padding is consistent */
+  }
+  .timeline-logo {
+    /* Ensure logo doesn't get squished */
+    width: 5rem;
+    height: 5rem;
+  }
+
+  /* --- Desktop Arrow Styles (Overlay Circles) --- */
+  .slide-nav-mobile {
+    display: none; /* Hide the mobile container */
+  }
+  /* Re-apply original styles within the slideshow */
+  .project-slideshow .slide-arrow.desktop-arrow {
+    /* Target only desktop arrows */
+    display: flex; /* Show them again */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none; /* Remove border from mobile */
+    border-radius: 50%; /* Make round again */
+    width: 4rem; /* Original width */
+    height: 4rem; /* Original height */
+    font-size: 3rem; /* Original size */
+    z-index: 10;
+    flex-grow: 0; /* Reset flex-grow */
+  }
+  .project-slideshow .slide-arrow.desktop-arrow:hover {
+    background: rgba(0, 0, 0, 0.7); /* Original hover */
+  }
+  .project-slideshow .prev-slide.desktop-arrow {
+    left: 1rem; /* Original position */
+    border-radius: 50%; /* Ensure round */
+  }
+  .project-slideshow .next-slide.desktop-arrow {
+    right: 1rem; /* Original position */
+    border-radius: 50%; /* Ensure round */
   }
 }
 
@@ -1322,7 +1431,7 @@ input:checked + .slider:before {
   background-color: var(--bg-alt);
   border: 1px solid var(--border-color);
   font-weight: 600;
-  display: none;
+  display: none; /* Hidden by default */
   align-items: center;
   justify-content: center;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -1347,7 +1456,7 @@ input:checked + .slider:before {
 .scroll-to-top-btn .button-text {
   position: absolute;
   left: 35px;
-  color: var(--text-primary);
+  color: white;
   font-size: 13px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -1378,11 +1487,6 @@ input:checked + .slider:before {
 }
 
 /* --- ⑰. FORM VALIDATION STYLES --- */
-.form-group {
-  position: relative;
-  padding-bottom: 2.2rem;
-  margin-bottom: 0.5rem;
-}
 
 .error-message {
   position: absolute;
@@ -1392,7 +1496,7 @@ input:checked + .slider:before {
   color: #ff5c5c;
   opacity: 0;
   transition: opacity 0.3s ease;
-  height: 2rem;
+  height: 2rem; /* Ensure space is occupied */
 }
 
 .error-message.visible {
@@ -1413,7 +1517,7 @@ input:checked + .slider:before {
 
 .btn:disabled:hover {
   filter: none;
-  background-color: var(--text-secondary);
+  background-color: var(--text-secondary); /* Keep disabled style on hover */
   color: white;
 }
 
@@ -1478,95 +1582,72 @@ body.loading .page-wrapper {
 .line:nth-child(1) {
   transform: rotate(calc(360deg / -12 * 1));
 }
-
 .line:nth-child(1)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 1);
 }
-
 .line:nth-child(2) {
   transform: rotate(calc(360deg / -12 * 2));
 }
-
 .line:nth-child(2)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 2);
 }
-
 .line:nth-child(3) {
   transform: rotate(calc(360deg / -12 * 3));
 }
-
 .line:nth-child(3)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 3);
 }
-
 .line:nth-child(4) {
   transform: rotate(calc(360deg / -12 * 4));
 }
-
 .line:nth-child(4)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 4);
 }
-
 .line:nth-child(5) {
   transform: rotate(calc(360deg / -12 * 5));
 }
-
 .line:nth-child(5)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 5);
 }
-
 .line:nth-child(6) {
   transform: rotate(calc(360deg / -12 * 6));
 }
-
 .line:nth-child(6)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 6);
 }
-
 .line:nth-child(7) {
   transform: rotate(calc(360deg / -12 * 7));
 }
-
 .line:nth-child(7)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 7);
 }
-
 .line:nth-child(8) {
   transform: rotate(calc(360deg / -12 * 8));
 }
-
 .line:nth-child(8)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 8);
 }
-
 .line:nth-child(9) {
   transform: rotate(calc(360deg / -12 * 9));
 }
-
 .line:nth-child(9)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 9);
 }
-
 .line:nth-child(10) {
   transform: rotate(calc(360deg / -12 * 10));
 }
-
 .line:nth-child(10)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 10);
 }
-
 .line:nth-child(11) {
   transform: rotate(calc(360deg / -12 * 11));
 }
-
 .line:nth-child(11)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 11);
 }
-
 .line:nth-child(12) {
   transform: rotate(calc(360deg / -12 * 12));
 }
-
 .line:nth-child(12)::before {
   animation-delay: calc(var(--uib-speed) / -12 * 12);
 }
@@ -1578,97 +1659,8 @@ body.loading .page-wrapper {
     transform: scaleY(0.75);
     opacity: 0;
   }
-
   20% {
     transform: scaleY(1);
     opacity: 1;
-  }
-}
-/* --- PROJECT SLIDESHOW CONTROLS --- */
-.project-slideshow {
-  position: relative;
-  width: 100%;
-  min-height: 250px;
-  overflow: hidden; /* Add overflow hidden */
-}
-
-.project-slideshow .slide {
-  /* ... existing styles ... */
-  /* Change transition for slide effect */
-  transition: opacity 0.6s ease-in-out;
-}
-
-.slide-arrow {
-  display: none; /* Hide by default */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  font-size: 3rem;
-  cursor: pointer;
-  z-index: 10;
-  transition: background 0.3s;
-  align-items: center;
-  justify-content: center;
-}
-
-.slide-arrow:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.slide-arrow.prev-slide {
-  left: 1rem;
-}
-
-.slide-arrow.next-slide {
-  right: 1rem;
-}
-
-.slide-dots {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.8rem;
-  z-index: 10;
-}
-
-.slide-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.slide-dot.active {
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-/* Show arrows only on desktop */
-@media (min-width: 768px) {
-  .slide-arrow {
-    display: flex;
-  }
-}
-
-/* Hide dots on desktop */
-@media (min-width: 768px) {
-  .slide-dots {
-    display: none;
-  }
-}
-
-/* Responsive slideshow height (from issue #6) */
-@media (max-width: 767px) {
-  .project-slideshow {
-    min-height: 200px;
   }
 }

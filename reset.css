@@ -19,7 +19,7 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
-  --primary: #71b7fb;
+  --primary: #007cb7;
   --primary-glow: rgba(113, 183, 251, 0.7); /* ADD THIS LINE */
   --bg: #f4f2ee;
   --bg-alt: #ffffff;
