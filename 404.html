@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Not Found | Karuna Susan Benny</title>
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
       rel="stylesheet"
@@ -23,51 +23,61 @@
         padding: 4rem 2rem;
         text-align: center;
       }
-      .back-to-home {
+      .error-page__back-link {
         position: absolute;
         top: 2rem;
         left: 2rem;
         width: fit-content;
       }
-      .card-content {
+      .error-card {
+        max-width: 800px;
+        margin: auto;
+        background: var(--bg-alt);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+      }
+      .error-card__content {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 4rem 2rem;
       }
-      .error-image {
+      .error-card__image {
         max-width: 100%;
         width: 300px;
         height: auto;
         margin-bottom: 3rem;
       }
-      h1 {
+      .error-card__title {
         font-family: var(--font-heading);
         font-size: 3rem;
         font-weight: 600;
         color: var(--text-primary);
         margin-bottom: 1rem;
       }
-      p {
+      .error-card__message {
         color: var(--text-secondary);
         max-width: 35ch;
       }
     </style>
   </head>
   <body>
-    <a href="index.html" class="btn btn-secondary back-to-home">
+    <a href="index.html" class="btn btn--secondary error-page__back-link">
       <i class="bx bx-chevron-left"></i>
       <span>Back to Home</span>
     </a>
-    <div class="home-card">
-      <div class="card-content">
+    <div class="error-card">
+      <div class="error-card__content">
         <img
           src="assets/images/404.svg"
           alt="Page not found"
-          class="error-image"
+          class="error-card__image"
         />
-        <h1>Page Not Found</h1>
-        <p>Oops! Looks like the page you were looking for doesn't exist.</p>
+        <h1 class="error-card__title">Page Not Found</h1>
+        <p class="error-card__message">
+          Oops! Looks like the page you were looking for doesn't exist.
+        </p>
       </div>
     </div>
   </body>
