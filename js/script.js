@@ -255,7 +255,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     });
-    // If scrolled to the very top, make "Home" active
     if (scrollY < 100 && !currentActiveFound) {
       navLinks.forEach((link) => {
         link.classList.toggle("active", link.getAttribute("href") === "#home");
