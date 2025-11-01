@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy Policy | Karuna Susan Benny</title>
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
       rel="stylesheet"
@@ -18,7 +18,7 @@
       body {
         padding: 8rem 2rem 4rem;
       }
-      .back-to-home {
+      .privacy-page__back-link {
         position: absolute;
         top: 2rem;
         left: 2rem;
@@ -27,12 +27,16 @@
       .privacy-card {
         max-width: 800px;
         margin: auto;
+        background: var(--bg-alt); /* Using variables from your style.css */
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
       }
-      .card-content {
+      .privacy-card__content {
         padding: 2.5rem 4rem;
         text-align: left;
       }
-      .card-content h1 {
+      .privacy-card__title {
         font-family: var(--font-heading);
         font-size: 3.2rem;
         color: var(--text-primary);
@@ -40,24 +44,24 @@
         border-bottom: 1px solid var(--border-color);
         padding-bottom: 1rem;
       }
-      .card-content h2 {
+      .privacy-card__heading {
         font-size: 2.4rem;
         font-weight: 600;
         color: var(--text-primary);
         margin-top: 3rem;
         margin-bottom: 1.5rem;
       }
-      .card-content p {
+      .privacy-card__text {
         color: var(--text-secondary);
         margin-bottom: 1.5rem;
         line-height: 1.8;
       }
-      .card-content a {
+      .privacy-card__link {
         color: var(--primary);
         font-weight: 500;
         text-decoration: none;
       }
-      .card-content a:hover {
+      .privacy-card__link:hover {
         text-decoration: underline;
       }
     </style>
@@ -68,37 +72,37 @@
       <i class="bx bx-chevron-left"></i>
       <span>Back to Home</span>
     </a>
-    <div class="home-card privacy-card">
-      <div class="card-content">
-        <h1>Privacy Policy</h1>
-        <p>
+    <div class="privacy-card">
+      <div class="privacy-card__content">
+        <h1 class="privacy-card__title">Privacy Policy</h1>
+        <p class="privacy-card__text">
           This privacy policy explains how your information is handled when you
           use this portfolio website.
         </p>
-        <h2>Information Collection and Use</h2>
-        <p>
+        <h2 class="privacy-card__heading">Information Collection and Use</h2>
+        <p class="privacy-card__text">
           This is a static portfolio website. It does not collect any personal
           data, use cookies, or track you in any way. Your visit is completely
           anonymous.
         </p>
-        <h2>Contact Form</h2>
-        <p>
+        <h2 class="privacy-card__heading">Contact Form</h2>
+        <p class="privacy-card__text">
           If you choose to use the contact form, the information you provide
           (your name, email address, and message) will be sent directly to me to
           respond to your inquiry. This information is handled via Netlify Forms
           and is not stored on this website's server. It will not be used for
           marketing purposes or shared with third parties.
         </p>
-        <h2>Third-Party Links</h2>
-        <p>
+        <h2 class="privacy-card__heading">Third-Party Links</h2>
+        <p class="privacy-card__text">
           This website may contain links to other websites (like GitHub,
           LinkedIn, etc.). Please be aware that I am not responsible for the
           content or privacy practices of such other sites. I encourage you to
           be aware when you leave this site and to read the privacy statements
           of any other site that collects personally identifiable information.
         </p>
-        <h2>Changes to This Privacy Policy</h2>
-        <p>
+        <h2 class="privacy-card__heading">Changes to This Privacy Policy</h2>
+        <p class="privacy-card__text">
           This Privacy Policy may be updated from time to time. Any changes will
           be posted on this page. This policy is effective as of October 2025.
         </p>
