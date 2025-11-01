@@ -60,7 +60,7 @@
       href="assets/icons/favicon-16x16.png"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.boxicons.com" crossorigin />
     <link rel="preload" href="assets/images/profile.webp" as="image" />
@@ -82,7 +82,15 @@
       onload="this.rel='stylesheet'"
     />
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="preload"
+      href="css/style.css"
+      as="style"
+      onload="this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="css/style.css" />
+    </noscript>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600;700&display=swap"
@@ -153,7 +161,7 @@
       </div>
     </div>
 
-    <nav class="mobile-nav" id="mobile-nav">
+    <nav class="mobile-nav" id="mobile-nav" role="navigation">
       <div class="mobile-nav-list">
         <a href="#home" class="nav-item active"
           ><i class="bx bxs-home-alt"></i><span>Home</span></a
@@ -196,7 +204,7 @@
             <img src="assets/icons/favicon.svg" alt="Logo" class="logo-svg" />
             <span id="easter-egg" class="easter-egg-text"></span>
           </a>
-          <nav class="nav-desktop">
+          <nav class="nav-desktop" role="navigation">
             <a href="#home" class="nav-item active"
               ><i class="bx bxs-home-alt"></i><span>Home</span></a
             >
@@ -295,7 +303,7 @@
         </div>
       </header>
 
-      <main class="container">
+      <main class="container" role="main">
         <section class="home-section" id="home">
           <div class="home-grid">
             <div class="main-content-area">
@@ -308,6 +316,7 @@
                     src="assets/images/profile.webp"
                     alt="Karuna Susan Benny"
                     class="profile-pic"
+                    fetchpriority="high"
                   />
                   <div class="home-text">
                     <h1>KARUNA SUSAN BENNY</h1>
@@ -340,7 +349,7 @@
 
             <aside class="sidebar-area">
               <div class="social-card home-card">
-                <h2>Social Media</h2>
+                <h2 class="social-card-title">Social Media</h2>
                 <ul class="social-links">
                   <li>
                     <a
@@ -441,9 +450,8 @@
                 </div>
               </div>
               <div class="separator-with-text">
-                <span class="separator"></span
-                ><span class="text">TOP SKILLS</span
-                ><span class="separator"></span>
+                <span class="line"></span><span class="text">TOP SKILLS</span
+                ><span class="line"></span>
               </div>
               <div class="skills-chips-container">
                 <div class="skill-chip">
@@ -504,7 +512,7 @@
                         rel="noopener noreferrer"
                         class="timeline-logo-link"
                         ><img
-                          src="assets/images/macfast.png"
+                          src="assets/images/macfast.webp"
                           alt="Macfast Logo"
                           class="timeline-logo"
                           loading="lazy"
@@ -530,7 +538,7 @@
                         rel="noopener noreferrer"
                         class="timeline-logo-link"
                         ><img
-                          src="assets/images/cms.png"
+                          src="assets/images/cms.webp"
                           alt="CMS College of Science & Commerce, Coimbatore - Logo"
                           class="timeline-logo"
                           loading="lazy"
@@ -555,7 +563,7 @@
                         rel="noopener noreferrer"
                         class="timeline-logo-link"
                         ><img
-                          src="assets/images/gphss.png"
+                          src="assets/images/gphss.webp"
                           alt="Grama Panchayat Higher Secondary School, Kulanada - Logo"
                           class="timeline-logo"
                           loading="lazy"
@@ -580,7 +588,7 @@
                         rel="noopener noreferrer"
                         class="timeline-logo-link"
                         ><img
-                          src="assets/images/sthomas.png"
+                          src="assets/images/sthomas.webp"
                           alt="St. Thomas English Medium High School, Kurampala - Logo"
                           class="timeline-logo"
                           loading="lazy"
@@ -603,7 +611,7 @@
                   <h2 class="section-title">Volunteer</h2>
                   <div class="volunteer-body">
                     <img
-                      src="assets/images/nsslogo.png"
+                      src="assets/images/nsslogo.webp"
                       alt="NSS Logo"
                       class="volunteer-logo"
                       loading="lazy"

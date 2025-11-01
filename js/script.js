@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // --- Element Definitions ---
   const pageWrapper = document.getElementById("page-wrapper");
   const hamburgerCheckbox = document.getElementById("checkbox");
+  const mobileNav = document.getElementById("mobile-nav");
   const mobileNavLinks = document.querySelectorAll(
     ".mobile-nav-list .nav-item"
   );
@@ -9,12 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll(".nav-desktop .nav-item");
   const logo = document.querySelector(".logo-svg");
   const easterEggText = document.getElementById("easter-egg");
-  const mobileNav = document.getElementById("mobile-nav");
+
+  // --- Dynamic Copyright Year ---
   const yearEl = document.getElementById("copyright-year");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
 
+  // --- Logo Easter Egg ---
   if (logo && easterEggText) {
     logo.addEventListener("dblclick", () => {
       if (window.innerWidth < 1024) return;
@@ -39,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // --- About Card Toggling ---
   aboutCards.forEach((card) => {
     card.addEventListener("click", () => {
       if (card.classList.contains("active")) return;
@@ -53,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // --- Mobile Navigation Toggle ---
   if (hamburgerCheckbox && pageWrapper && mobileNav) {
     hamburgerCheckbox.addEventListener("change", () => {
       pageWrapper.classList.toggle("menu-open", hamburgerCheckbox.checked);
@@ -69,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // --- Theme Toggle ---
   const desktopThemeToggle = document.getElementById("themeToggleDesktop");
   const mobileThemeToggle = document.getElementById("mobile-theme-toggle");
 
@@ -102,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : "light");
   applyTheme(savedTheme);
 
+  // --- Tagline Typewriter Animation ---
   const taglineWord = document.getElementById("tagline-word");
   if (taglineWord) {
     const words = [
@@ -138,6 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     typeEffect();
   }
 
+  // --- Timeline Scroll Animation ---
   const timelineItems = document.querySelectorAll(".timeline-item");
   const observer = new IntersectionObserver(
     (entries) => {
@@ -158,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(item);
   });
 
+  // --- Project Slideshow ---
   document.querySelectorAll(".project-card").forEach((projectCard) => {
     const slideshow = projectCard.querySelector(".project-slideshow");
     const slides = slideshow ? slideshow.querySelectorAll(".slide") : [];
@@ -237,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startAutoSlide();
   });
 
+  // --- Skills Marquee ---
   const marqueeContent = document.getElementById("marquee-content");
   if (marqueeContent) {
     const icons = marqueeContent.querySelectorAll("i");
@@ -249,13 +260,28 @@ document.addEventListener("DOMContentLoaded", () => {
     marqueeContent.classList.add("animated");
   }
 
+  // --- Optimized Active Nav Highlighting (Fix for Forced Reflow) ---
+  let sectionPositions = [];
+
+  const cacheSectionPositions = () => {
+    sectionPositions = [];
+    sections.forEach((current) => {
+      sectionPositions.push({
+        id: current.getAttribute("id"),
+        top: current.offsetTop,
+        height: current.offsetHeight,
+      });
+    });
+  };
+
   const updateActiveNav = () => {
     let scrollY = window.pageYOffset;
     let currentActiveFound = false;
-    sections.forEach((current) => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 100;
-      const sectionId = current.getAttribute("id");
+
+    sectionPositions.forEach((section) => {
+      const sectionTop = section.top - 100;
+      const sectionId = section.id;
+      const sectionHeight = section.height;
 
       if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
         currentActiveFound = true;
@@ -273,6 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     });
+
     if (scrollY < 100 && !currentActiveFound) {
       navLinks.forEach((link) => {
         link.classList.toggle("active", link.getAttribute("href") === "#home");
@@ -282,9 +309,13 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   };
-  window.addEventListener("scroll", updateActiveNav);
-  updateActiveNav();
 
+  cacheSectionPositions(); // Calculate positions on load
+  window.addEventListener("resize", cacheSectionPositions); // Recalculate on resize
+  window.addEventListener("scroll", updateActiveNav); // Check on scroll
+  updateActiveNav(); // Run once on load
+
+  // --- Contact Form Validation ---
   const contactForm = document.forms["contact"];
   if (contactForm) {
     contactForm.setAttribute("novalidate", "");
@@ -381,6 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
     messageInput.addEventListener("blur", validateMessage);
   }
 
+  // --- Scroll-to-Top Button ---
   const scrollTopBtn = document.getElementById("scrollTopBtn");
   const pageWrapperForScrollBtn = document.getElementById("page-wrapper");
   const hamburgerCheckboxForScrollBtn = document.getElementById("checkbox");
@@ -410,6 +442,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// --- Page Loader ---
 document.body.classList.add("loading");
 const loader = document.getElementById("loader");
 window.onload = () => {
