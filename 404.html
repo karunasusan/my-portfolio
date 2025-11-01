@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Not Found | Karuna Susan Benny</title>
-    <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link
       href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
@@ -27,7 +26,7 @@
         position: absolute;
         top: 2rem;
         left: 2rem;
-        width: fit-content;
+        width: fit-content; /* <-- Ensures button is not full-width */
       }
       .error-card {
         max-width: 800px;
@@ -63,7 +62,7 @@
     </style>
   </head>
   <body>
-    <a href="index.html" class="btn btn--secondary error-page__back-link">
+    <a href="index.html" class="btn btn-primary error-page__back-link">
       <i class="bx bx-chevron-left"></i>
       <span>Back to Home</span>
     </a>

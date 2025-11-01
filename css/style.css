@@ -18,7 +18,7 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
-  --primary: #71b7fb;
+  --primary: #007cb7;
   --primary-glow: rgba(113, 183, 251, 0.7);
   --bg: #f4f2ee;
   --bg-alt: #ffffff;
@@ -237,12 +237,19 @@ body.loading .page-wrapper {
   right: 0;
   width: 280px;
   height: 100%;
-  background-color: #1b1f23;
+  background-color: var(--bg-alt);
   z-index: 50;
   padding: 8rem 2rem 2rem;
-  display: flex;
+  display: none;
   flex-direction: column;
 }
+html[data-theme="light"] .mobile-nav {
+  background-color: var(--bg-alt);
+}
+.mobile-nav.is-open {
+  display: flex;
+}
+
 html[data-theme="light"] .mobile-nav {
   background-color: #ffffff;
 }
@@ -602,6 +609,7 @@ input:checked + .slider:before {
   color: var(--text-secondary);
   min-height: 2.7rem;
   white-space: nowrap;
+  margin-bottom: 1.5rem;
 }
 .tagline .cursor {
   display: inline-block;
@@ -662,11 +670,13 @@ input:checked + .slider:before {
   padding: 2.5rem;
   height: 100%;
 }
-.social-card h3 {
+.social-card h2 {
+  font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 2rem;
   text-align: left;
+  letter-spacing: 1px;
 }
 .social-links {
   list-style: none;
@@ -703,8 +713,16 @@ input:checked + .slider:before {
   color: var(--primary);
 }
 
-.about-section,
-.tech-stack-section,
+.about-section {
+  padding-top: 2.5rem;
+  padding-bottom: 0;
+}
+
+.tech-stack-section {
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
 .education-section,
 .projects-section,
 .contact-section {
@@ -779,11 +797,11 @@ input:checked + .slider:before {
   gap: 1.5rem;
   margin: 2.5rem 0;
 }
-.separator-with-text .line {
+.separator-with-text .separator {
   flex-grow: 1;
   height: 1px;
   background-color: var(--border-color);
-  opacity: 0.5;
+  opacity: 1;
 }
 .separator-with-text .text {
   font-size: 1rem;
@@ -847,7 +865,21 @@ input:checked + .slider:before {
   align-items: center;
   gap: 6rem;
   width: fit-content;
-  animation: scroll-left 30s linear infinite;
+}
+.marquee-content.animated {
+  animation: 30s linear infinite scroll-left;
+}
+
+.marquee-container:hover .marquee-content.animated {
+  animation-play-state: paused;
+}
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 .marquee-container:hover .marquee-content {
   animation-play-state: paused;
@@ -891,6 +923,9 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+.language-char {
+  font-family: var(--font-heading);
 }
 .timeline {
   position: relative;
@@ -1099,13 +1134,17 @@ input:checked + .slider:before {
 .slide-nav-mobile {
   display: flex;
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0;
+  gap: 1.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1.5rem;
 }
 .slide-nav-mobile .prev-slide {
-  border-radius: 2rem 0 0 2rem;
+  border-radius: 2rem;
 }
 .slide-nav-mobile .next-slide {
-  border-radius: 0 2rem 2rem 0;
+  border-radius: 2rem;
 }
 .desktop-arrow {
   display: none;
@@ -1317,7 +1356,7 @@ input:checked + .slider:before {
 .scroll-to-top-btn .button-text {
   position: absolute;
   left: 35px;
-  color: white; /* Changed to white for better visibility on primary bg hover */
+  color: white;
   font-size: 13px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -1440,8 +1479,8 @@ input:checked + .slider:before {
     transform: none;
     border-radius: 0;
     box-shadow: none;
-    filter: none; /* Remove blur on desktop */
-    overflow: visible; /* Restore overflow */
+    filter: none;
+    overflow: visible;
   }
 }
 
@@ -1468,4 +1507,25 @@ input:checked + .slider:before {
   }
   .scroll-to-top-btn:hover .button-text {
     opacity: 1;
-  }}
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .timeline-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .marquee-content.animated {
+    animation: none;
+  }
+}

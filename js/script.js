@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll(".nav-desktop .nav-item");
   const logo = document.querySelector(".logo-svg");
   const easterEggText = document.getElementById("easter-egg");
+  const mobileNav = document.getElementById("mobile-nav");
+  const yearEl = document.getElementById("copyright-year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
 
   if (logo && easterEggText) {
     logo.addEventListener("dblclick", () => {
@@ -48,9 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  if (hamburgerCheckbox && pageWrapper) {
+  if (hamburgerCheckbox && pageWrapper && mobileNav) {
     hamburgerCheckbox.addEventListener("change", () => {
       pageWrapper.classList.toggle("menu-open", hamburgerCheckbox.checked);
+      mobileNav.classList.toggle("is-open", hamburgerCheckbox.checked);
     });
   }
 
@@ -231,6 +237,18 @@ document.addEventListener("DOMContentLoaded", () => {
     startAutoSlide();
   });
 
+  const marqueeContent = document.getElementById("marquee-content");
+  if (marqueeContent) {
+    const icons = marqueeContent.querySelectorAll("i");
+
+    icons.forEach((icon) => {
+      const clone = icon.cloneNode(true);
+      marqueeContent.appendChild(clone);
+    });
+
+    marqueeContent.classList.add("animated");
+  }
+
   const updateActiveNav = () => {
     let scrollY = window.pageYOffset;
     let currentActiveFound = false;
@@ -269,6 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const contactForm = document.forms["contact"];
   if (contactForm) {
+    contactForm.setAttribute("novalidate", "");
     const nameInput = document.getElementById("name");
     const emailInput = document.getElementById("email");
     const messageInput = document.getElementById("message");
