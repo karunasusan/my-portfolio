@@ -99,9 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const taglineWord = document.getElementById("tagline-word");
   if (taglineWord) {
     const words = [
-      "web experiences.",
-      "creative solutions.",
-      "intuitive interfaces.",
+      "beautiful interfaces.",
+      "meaningful interactions.",
+      "user focused websites.",
     ];
     let wordIndex = 0,
       letterIndex = 0,

@@ -685,6 +685,7 @@ input:checked + .slider:before {
   color: var(--text-secondary);
   font-size: 1.6rem;
   font-weight: 500;
+  font-family: var(--transition-smooth);
   padding: 1rem;
   border-radius: 8px;
   transition: var(--transition-smooth);
@@ -795,17 +796,17 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .skill-chip {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   background: var(--bg);
   color: var(--text-secondary);
   font-weight: 500;
-  padding: 1.2rem 1.5rem;
+  padding: 0.8rem 1.2rem;
   border-radius: 50px;
   border: 1px solid var(--border-color);
   transition: var(--transition-smooth);
@@ -1468,4 +1469,3 @@ input:checked + .slider:before {
   .scroll-to-top-btn:hover .button-text {
     opacity: 1;
   }
-}
