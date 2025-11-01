@@ -1,27 +1,42 @@
-# Karuna Susan Benny - Personal Portfolio
+# Personal Portfolio Website
 
-Welcome to the repository for my personal portfolio website. This single-page site is built from scratch to showcase my journey, skills, and projects as a frontend developer. It is designed to be fully responsive, accessible, and performant.
+This is the complete source code for my personal portfolio website, built from scratch to showcase my skills, projects, and professional background as a frontend developer.
 
----
-
-## 🚀 Live Demo
-
-You can view the live site here:
+The live site is hosted on Netlify:
 **[https://karunasusanbenny.netlify.app/](https://karunasusanbenny.netlify.app/)**
 
 ---
 
-## ✨ Features
+## Project Overview
 
-This portfolio is packed with features to create a modern and user-friendly experience:
+This is a fully responsive, modern, single-page portfolio designed to be a high-performance, accessible, and user-friendly web experience. It is built entirely with foundational web technologies (HTML, CSS, and vanilla JavaScript) and no frameworks.
 
-- **Responsive Design:** Fully mobile-first layout that adapts to all screen sizes.
-- **Dark/Light Theme:** A theme toggle that respects and saves the user's preference via `localStorage`.
-- **Dynamic Typing Effect:** An engaging, auto-typing tagline in the hero section.
-- **Contact Form:** A functional contact form with client-side validation, powered by Netlify Forms.
-- **Scroll Animations:** Subtle fade-in animations for the education timeline as you scroll.
-- **Accessibility:** Built with semantic HTML, `aria-` attributes, a "Skip to home" link, and full keyboard navigation support.
-- **SEO Optimized:** Includes a `robots.txt`, relevant meta tags, Open Graph tags, and a JSON-LD schema for rich search results.
+The site includes a "Home" section with a dynamic tagline, an "About Me" section with skills, a "Projects" showcase, an "Education" timeline, and a functional "Contact" form. It also features auxiliary pages for a [Privacy Policy](httpss://karunasusanbenny.netlify.app/privacy.html) and a custom 404 page, all fully integrated with the site's theme.
+
+## ✨ Key Features
+
+This repository is packed with modern web development features:
+
+- **Responsive & Mobile-First Design:** The layout adapts seamlessly from mobile to desktop, built using modern CSS Flexbox and Grid.
+- **Dual Theme (Dark/Light):** A theme toggle allows users to switch between dark and light modes. This preference is saved in `localStorage` and respects the user's system-level preference (`prefers-color-scheme`) on first visit.
+- **Rich Interactivity (Vanilla JS):** All interactive elements are built with clean, modular, and performant ES6+ JavaScript:
+  - **Dynamic Typing Effect:** An auto-typing and deleting tagline in the hero section.
+  - **Project Slideshow:** An automated, looping slideshow for project images.
+  - **Skills Marquee:** A pausable, infinite-scrolling marquee for the tech stack section.
+  - **Client-Side Form Validation:** The contact form provides real-time validation for name, email, and message fields before submission.
+- **Performance Optimized:**
+  - **Asset Preloading:** Uses `<link rel="preload">` and `<link rel="preconnect">` for critical fonts and styles to speed up load times.
+  - **Deferred Scripts:** All JavaScript is loaded with `defer` to prevent render-blocking.
+  - **Minified Assets:** Minified versions of `style.min.css` and `script.min.js` are provided.
+- **Accessibility (A11y):**
+  - Built with semantic HTML5 (e.g., `<main>`, `<nav>`, `<section>`).
+  - Includes a "Skip to home" link for keyboard navigation.
+  - Uses `aria-label` attributes and visually-hidden text for icon-only buttons.
+- **SEO & Security:**
+  - **JSON-LD Schema:** Provides a rich schema for search engines to understand the page content.
+  - **Meta & Open Graph:** Comprehensive meta, Open Graph, and Twitter card tags for optimal search and social media sharing.
+  - **Search Engine Ready:** Includes a `robots.txt` and `sitemap.xml`.
+  - **Security Headers:** A custom `_headers` file is configured for Netlify to set `Strict-Transport-Security` and `X-Frame-Options`.
 
 ---
 
@@ -29,9 +44,17 @@ This portfolio is packed with features to create a modern and user-friendly expe
 
 This project is built purely with foundational web technologies, with no frameworks or libraries.
 
-- **HTML5:** Semantic and accessible markup.
-- **CSS3:** Modern styling using Flexbox, Grid, CSS Variables, and responsive media queries.
-- **JavaScript (ES6+):** Clean, modular JavaScript for all interactivity, DOM manipulation, and animations.
+- **HTML5:** Semantic, accessible, and SEO-optimized markup.
+- **CSS3:** Modern styling using:
+  - CSS Variables (for theming)
+  - Flexbox & Grid
+  - Media Queries (for responsive design)
+  - Keyframe Animations
+- **JavaScript (ES6+):**
+  - DOM Manipulation
+  - Event Listeners
+  - `localStorage`
+  - Intersection Observer (for scroll animations)
 
 ---
 
@@ -42,35 +65,12 @@ To run this project locally, you only need a web browser and a code editor.
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/karunasusan/my-portfolio.git](https://github.com/karunasusan/my-portfolio.git)
+    git clone https://github.com/karunasusan/my-portfolio.git
     cd my-portfolio
     ```
 
-2.  **Install development dependencies:**
-    This project uses `npm` to manage Prettier for code formatting.
-
-    ```bash
-    npm install
-    ```
-
-3.  **Run the project:**
-    You can open the `index.html` file directly in your browser. For the best development experience, I recommend using the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension for VS Code.
-
----
-
-## 🧹 Code Formatting
-
-This repository uses **Prettier** to maintain consistent code formatting.
-
-- **To check for formatting issues:**
-  ```bash
-  npm run format:check
-  ```
-- **To automatically format all files:**
-  ```bash
-  npm run format:write
-  ```
-  The `.prettierignore` file is set up to ignore minified files.
+2.  **Run the project:**
+    Open the `index.html` file directly in your browser. For the best development experience (with hot-reloading), I recommend using the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension for VS Code.
 
 ---
 
@@ -78,6 +78,7 @@ This repository uses **Prettier** to maintain consistent code formatting.
 
 This static site is deployed and hosted with **Netlify**.
 
-- The master branch is automatically built and deployed upon a push.
-- The contact form is integrated with Netlify Forms.
+- The main branch is automatically built and deployed upon a push.
+- The contact form is integrated with **Netlify Forms** by adding the `data-netlify="true"` attribute to the `<form>` tag.
+- Custom `_headers` are used for site security.
 - A custom `404.html` page is included.

@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // --- Debounce Helper Function ---
+  const debounce = (func, wait = 20, immediate = true) => {
+    let timeout;
+    return function () {
+      let context = this,
+        args = arguments;
+      let later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      let callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
   // --- Element Definitions ---
   const pageWrapper = document.getElementById("page-wrapper");
   const hamburgerCheckbox = document.getElementById("checkbox");
@@ -310,10 +327,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  cacheSectionPositions(); // Calculate positions on load
-  window.addEventListener("resize", cacheSectionPositions); // Recalculate on resize
-  window.addEventListener("scroll", updateActiveNav); // Check on scroll
-  updateActiveNav(); // Run once on load
+  cacheSectionPositions();
+  window.addEventListener(
+    "resize",
+    debounce(
+      () => {
+        cacheSectionPositions();
+        updateActiveNav();
+      },
+      250,
+      false
+    )
+  );
+
+  window.addEventListener("scroll", updateActiveNav);
+  updateActiveNav();
 
   // --- Contact Form Validation ---
   const contactForm = document.forms["contact"];
