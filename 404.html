@@ -32,7 +32,7 @@
       property="og:description"
       content="Oops! The page you were looking for doesn't exist."
     />
-    <meta property="og:image" content="assets/images/media_preview.png" />
+    <meta property="og:image" content="assets/images/profile.webp" />
     <meta
       property="og:url"
       content="https://karunasusanbenny.netlify.app/404.html"
@@ -61,13 +61,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.boxicons.com" crossorigin />
-
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600&display=swap"
-      as="style"
-    />
     <link
       href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
@@ -75,37 +68,10 @@
 
     <link
       href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
-      rel="preload"
-      as="style"
-      onload="this.rel='stylesheet'"
-    />
-    <link
-      href="https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css"
-      rel="preload"
-      as="style"
-      onload="this.rel='stylesheet'"
+      rel="stylesheet"
     />
 
-    <link
-      rel="preload"
-      href="css/style.min.css"
-      as="style"
-      onload="this.rel='stylesheet'"
-    />
-    <noscript>
-      <link rel="stylesheet" href="css/style.min.css" />
-    </noscript>
-
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
-    /></noscript>
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css"
-    /></noscript>
+    <link rel="stylesheet" href="css/style.min.css" />
 
     <style>
       body.loading .page-wrapper {
@@ -130,9 +96,10 @@
       }
     </style>
   </head>
+
   <body class="error-page-body">
     <a href="index.html" class="btn btn-primary error-page__back-link">
-      <i class="bx bx-chevron-left"></i>
+      <i class="bx bx-chevron-left" aria-hidden="true"></i>
       <span>Back to Home</span>
     </a>
     <div class="error-card">
@@ -141,6 +108,8 @@
           src="assets/images/404.svg"
           alt="Page not found"
           class="error-card__image"
+          width="300"
+          height="240"
         />
         <h1 class="error-card__title">Page Not Found</h1>
         <p class="error-card__message">

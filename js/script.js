@@ -105,6 +105,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  if (pageWrapper && hamburgerCheckbox) {
+    pageWrapper.addEventListener("click", () => {
+      if (pageWrapper.classList.contains("menu-open")) {
+        hamburgerCheckbox.checked = false;
+        hamburgerCheckbox.dispatchEvent(new Event("change"));
+      }
+    });
+  }
+
   // --- Theme Toggle ---
   const desktopThemeToggle = document.getElementById("themeToggleDesktop");
   const mobileThemeToggle = document.getElementById("mobile-theme-toggle");
@@ -150,11 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let wordIndex = 0,
       letterIndex = 0,
       isDeleting = false;
+    let typeEffectTimeout;
 
     function typeEffect() {
       const currentWord = words[wordIndex];
       const typeSpeed = isDeleting ? 100 : 200;
       taglineWord.textContent = currentWord.substring(0, letterIndex);
+
       if (!isDeleting && letterIndex < currentWord.length) {
         letterIndex++;
       } else if (isDeleting && letterIndex > 0) {
@@ -165,15 +176,33 @@ document.addEventListener("DOMContentLoaded", () => {
           wordIndex = (wordIndex + 1) % words.length;
         }
       }
+
       let delay = typeSpeed;
       if (!isDeleting && letterIndex === currentWord.length) {
         delay = 2000;
       } else if (isDeleting && letterIndex === 0) {
         delay = 1000;
       }
-      setTimeout(typeEffect, delay);
+
+      typeEffectTimeout = setTimeout(typeEffect, delay);
     }
-    typeEffect();
+
+    const taglineObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          clearTimeout(typeEffectTimeout);
+          typeEffect();
+        } else {
+          clearTimeout(typeEffectTimeout);
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    taglineObserver.observe(taglineWord);
   }
 
   // --- Timeline Scroll Animation ---

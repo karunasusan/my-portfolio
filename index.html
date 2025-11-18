@@ -13,7 +13,6 @@
       content="Karuna Susan Benny, Frontend Developer, Web Developer, Portfolio, Kerala, Pathanamthitta"
     />
     <meta name="author" content="Karuna Susan Benny" />
-
     <meta
       name="theme-color"
       content="#111111"
@@ -35,7 +34,7 @@
       property="og:description"
       content="Welcome to my portfolio. Let's build something amazing together."
     />
-    <meta property="og:image" content="assets/images/media_preview.png" />
+    <meta property="og:image" content="assets/images/profile.webp" />
     <meta property="og:url" content="https://karunasusanbenny.netlify.app/" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -63,8 +62,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.boxicons.com" crossorigin />
 
-    <link rel="preload" href="assets/images/profile.webp" as="image" />
-
+    <link
+      rel="preload"
+      href="assets/images/profile.webp"
+      as="image"
+    />
     <link
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600&display=swap"
@@ -110,26 +112,9 @@
     /></noscript>
 
     <style>
-      body.loading .page-wrapper {
-        opacity: 0;
-      }
-      .loader-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--bg, #111);
-        z-index: 9999;
-        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-      }
-      .loader-wrapper.hidden {
-        opacity: 0;
-        visibility: hidden;
-      }
+      body.loading .page-wrapper { opacity: 0; }
+      .loader-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: var(--bg, #111); z-index: 9999; transition: opacity 0.5s ease-out, visibility 0.5s ease-out; }
+      .loader-wrapper.hidden { opacity: 0; visibility: hidden; }
     </style>
 
     <script type="application/ld+json">
@@ -146,7 +131,7 @@
         },
         "email": "mailto:karunasusanbenny@gmail.com",
         "url": "https://karunasusanbenny.netlify.app/",
-        "image": "https://karunasusanbenny.netlify.app/assets/images/media_preview.png",
+        "image": "https://karunasusanbenny.netlify.app/assets/images/profile.webp",
         "sameAs": [
           "https://www.linkedin.com/in/karunasusanbenny/",
           "https://github.com/karunasusan",
@@ -159,8 +144,8 @@
 
   <body>
     <div class="hamburger-container">
-      <input id="checkbox" type="checkbox" />
-      <label class="toggle" for="checkbox">
+      <input id="checkbox" type="checkbox" aria-expanded="false" />
+      <label class="toggle" for="checkbox" aria-controls="mobile-nav">
         <span class="visually-hidden">Toggle navigation menu</span>
         <span id="bar1" class="bars"></span>
         <span id="bar2" class="bars"></span>
@@ -225,7 +210,13 @@
       <header class="header">
         <div class="navbar container">
           <a href="#home" class="logo">
-            <img src="assets/icons/favicon.svg" alt="Logo" class="logo-svg" />
+            <img
+              src="assets/icons/favicon.svg"
+              alt="Logo"
+              class="logo-svg"
+              width="32"
+              height="32"
+            />
             <span id="easter-egg" class="easter-egg-text"></span>
           </a>
           <nav class="nav-desktop" role="navigation">
@@ -263,6 +254,7 @@
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   stroke="none"
+                  aria-hidden="true"
                 >
                   <mask id="moon-mask">
                     <rect
@@ -333,7 +325,12 @@
             <div class="main-content-area">
               <div class="home-card">
                 <div class="home-banner">
-                  <img src="assets/images/banner.webp" alt="Abstract Banner" />
+                  <img
+                    src="assets/images/banner.webp"
+                    alt="Abstract Banner"
+                    width="730"
+                    height="200"
+                  />
                 </div>
                 <div class="home-content-wrapper">
                   <img
@@ -341,6 +338,8 @@
                     alt="Karuna Susan Benny"
                     class="profile-pic"
                     fetchpriority="high"
+                    width="160"
+                    height="160"
                   />
                   <div class="home-text">
                     <h1>KARUNA SUSAN BENNY</h1>
@@ -349,7 +348,7 @@
                       ><span class="cursor"></span>
                     </p>
                     <div class="location">
-                      <i class="bx bxs-location"></i>
+                      <i class="bx bxs-location" aria-hidden="true"></i>
                       <span>Pathanamthitta, Kerala, India</span>
                     </div>
                   </div>
@@ -359,17 +358,19 @@
                 <a
                   href="mailto:karunasusanbenny@gmail.com"
                   class="btn btn-primary"
-                  ><i class="bxl bx-gmail"></i><span>Contact</span></a
+                  ><i class="bxl bx-gmail" aria-hidden="true"></i
+                  ><span>Contact</span></a
                 >
                 <a
                   href="assets/CV.pdf"
                   class="btn btn-primary"
                   target="_blank"
                   rel="noopener noreferrer"
-                  ><i class="bx bxs-file"></i><span>Resume</span></a
+                  ><i class="bx bxs-file" aria-hidden="true"></i
+                  ><span>Resume</span></a
                 >
                 <a href="#about" class="btn btn-secondary"
-                  ><i class="bx bx-arrow-down-stroke"></i
+                  ><i class="bx bx-arrow-down-stroke" aria-hidden="true"></i
                   ><span>View More</span></a
                 >
               </div>
@@ -385,7 +386,10 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       class="social-link"
-                      ><i class="bxl bx-linkedin-square"></i
+                      ><i
+                        class="bxl bx-linkedin-square"
+                        aria-hidden="true"
+                      ></i
                       ><span>LinkedIn</span></a
                     >
                   </li>
@@ -395,7 +399,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       class="social-link"
-                      ><i class="bxl bx-github"></i><span>GitHub</span></a
+                      ><i class="bxl bx-github" aria-hidden="true"></i
+                      ><span>GitHub</span></a
                     >
                   </li>
                   <li>
@@ -404,7 +409,7 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       class="social-link"
-                      ><i class="bxl bx-twitter-x"></i
+                      ><i class="bxl bx-twitter-x" aria-hidden="true"></i
                       ><span>X (Twitter)</span></a
                     >
                   </li>
@@ -414,7 +419,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       class="social-link"
-                      ><i class="bxl bx-instagram"></i><span>Instagram</span></a
+                      ><i class="bxl bx-instagram" aria-hidden="true"></i
+                      ><span>Instagram</span></a
                     >
                   </li>
                   <li>
@@ -423,7 +429,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       class="social-link"
-                      ><i class="bxl bx-dribbble"></i><span>Dribbble</span></a
+                      ><i class="bxl bx-dribbble" aria-hidden="true"></i
+                      ><span>Dribbble</span></a
                     >
                   </li>
                   <li>
@@ -432,7 +439,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       class="social-link"
-                      ><i class="bxl bx-behance"></i><span>Behance</span></a
+                      ><i class="bxl bx-behance" aria-hidden="true"></i
+                      ><span>Behance</span></a
                     >
                   </li>
                 </ul>
@@ -448,7 +456,10 @@
               <div class="about-cards-container">
                 <div class="about-card" tabindex="0" role="button">
                   <div class="about-card-content">
-                    <i class="bx bx-code-alt about-card-icon"></i>
+                    <i
+                      class="bx bx-code-alt about-card-icon"
+                      aria-hidden="true"
+                    ></i>
                     <h3 class="about-card-title">Frontend<br />Developer</h3>
                     <p class="about-card-description">
                       I specialize in creating beautiful and intuitive user
@@ -458,7 +469,7 @@
                 </div>
                 <div class="about-card" tabindex="0" role="button">
                   <div class="about-card-content">
-                    <i class="bx bx-paint about-card-icon"></i>
+                    <i class="bx bx-paint about-card-icon" aria-hidden="true"></i>
                     <h3 class="about-card-title">Creative<br />Thinker</h3>
                     <p class="about-card-description">
                       I love turning complex problems into simple, elegant
@@ -468,7 +479,7 @@
                 </div>
                 <div class="about-card" tabindex="0" role="button">
                   <div class="about-card-content">
-                    <i class="bx bx-rocket about-card-icon"></i>
+                    <i class="bx bx-rocket about-card-icon" aria-hidden="true"></i>
                     <h3 class="about-card-title">Lifelong<br />Learner</h3>
                     <p class="about-card-description">
                       I'm always excited to learn new skills, tools, and
@@ -483,13 +494,13 @@
               </div>
               <div class="skills-chips-container">
                 <div class="skill-chip">
-                  <i class="bxl bx-html5"></i><span>HTML5</span>
+                  <i class="bxl bx-html5" aria-hidden="true"></i><span>HTML5</span>
                 </div>
                 <div class="skill-chip">
-                  <i class="bxl bx-css3"></i><span>CSS3</span>
+                  <i class="bxl bx-css3" aria-hidden="true"></i><span>CSS3</span>
                 </div>
                 <div class="skill-chip">
-                  <i class="bxl bx-javascript"></i
+                  <i class="bxl bx-javascript" aria-hidden="true"></i
                   ><span>JavaScript (ES6+)</span>
                 </div>
               </div>
@@ -542,6 +553,8 @@
                           alt="Macfast Logo"
                           class="timeline-logo"
                           loading="lazy"
+                          width="50"
+                          height="50"
                       /></a>
                       <div class="timeline-details">
                         <h3 class="timeline-institution">
@@ -559,7 +572,7 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-card">
                       <a
-                        href="https://cmscollege.edu.in/sc/"
+                        href="httpsTwo://cmscollege.edu.in/sc/"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="timeline-logo-link"
@@ -568,6 +581,8 @@
                           alt="CMS College of Science & Commerce, Coimbatore - Logo"
                           class="timeline-logo"
                           loading="lazy"
+                          width="50"
+                          height="50"
                       /></a>
                       <div class="timeline-details">
                         <h3 class="timeline-institution">
@@ -593,6 +608,8 @@
                           alt="Grama Panchayat Higher Secondary School, Kulanada - Logo"
                           class="timeline-logo"
                           loading="lazy"
+                          width="50"
+                          height="50"
                       /></a>
                       <div class="timeline-details">
                         <h3 class="timeline-institution">
@@ -618,6 +635,8 @@
                           alt="St. Thomas English Medium High School, Kurampala - Logo"
                           class="timeline-logo"
                           loading="lazy"
+                          width="50"
+                          height="50"
                       /></a>
                       <div class="timeline-details">
                         <h3 class="timeline-institution">
@@ -641,6 +660,8 @@
                       alt="NSS Logo"
                       class="volunteer-logo"
                       loading="lazy"
+                      width="60"
+                      height="60"
                     />
                     <div class="volunteer-details">
                       <h3 class="volunteer-title">National Service Scheme</h3>
@@ -701,58 +722,73 @@
                   <button
                     class="slide-arrow prev-slide desktop-arrow"
                     title="Previous Image"
+                    aria-label="Previous Slide"
                   >
-                    <i class="bx bx-chevron-left"></i>
+                    <i class="bx bx-chevron-left" aria-hidden="true"></i>
                   </button>
                   <button
                     class="slide-arrow next-slide desktop-arrow"
                     title="Next Image"
+                    aria-label="Next Slide"
                   >
-                    <i class="bx bx-chevron-right"></i>
+                    <i class="bx bx-chevron-right" aria-hidden="true"></i>
                   </button>
                   <img
                     src="assets/images/inv1.webp"
-                    alt="Project Screenshot 1"
+                    alt="Inventory Management System Dashboard"
                     class="slide active"
                     loading="lazy"
+                    width="439"
+                    height="250"
                   />
                   <img
                     src="assets/images/inv2.webp"
-                    alt="Project Screenshot 2"
+                    alt="Inventory Management System Billing Page"
                     class="slide"
                     loading="lazy"
+                    width="439"
+                    height="250"
                   />
                   <img
                     src="assets/images/inv3.webp"
-                    alt="Project Screenshot 3"
+                    alt="Inventory Management System Inventory Page"
                     class="slide"
                     loading="lazy"
+                    width="439"
+                    height="250"
                   />
                   <img
                     src="assets/images/inv4.webp"
-                    alt="Project Screenshot 4"
+                    alt="Inventory Management System Add Product Page"
                     class="slide"
                     loading="lazy"
+                    width="439"
+                    height="250"
                   />
                   <img
                     src="assets/images/inv5.webp"
-                    alt="Project Screenshot 5"
+                    alt="Inventory Management System Sales Report Page"
                     class="slide"
                     loading="lazy"
+                    width="439"
+                    height="250"
                   />
+                  <div class="slide-dots"></div>
                 </div>
                 <div class="slide-nav-mobile">
                   <button
                     class="slide-arrow prev-slide mobile-arrow"
                     title="Previous Image"
+                    aria-label="Previous Slide"
                   >
-                    <i class="bx bx-chevron-left"></i>
+                    <i class="bx bx-chevron-left" aria-hidden="true"></i>
                   </button>
                   <button
                     class="slide-arrow next-slide mobile-arrow"
                     title="Next Image"
+                    aria-label="Next Slide"
                   >
-                    <i class="bx bx-chevron-right"></i>
+                    <i class="bx bx-chevron-right" aria-hidden="true"></i>
                   </button>
                 </div>
                 <div class="project-details">
@@ -773,7 +809,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="btn btn-secondary project-btn"
-                    ><i class="bxl bx-github"></i><span>View on GitHub</span></a
+                    ><i class="bxl bx-github" aria-hidden="true"></i
+                    ><span>View on GitHub</span></a
                   >
                 </div>
               </div>
@@ -782,7 +819,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-primary view-more-btn"
-                ><i class="bxl bx-github"></i
+                ><i class="bxl bx-github" aria-hidden="true"></i
                 ><span>View All Projects on GitHub</span></a
               >
             </div>
@@ -798,39 +835,40 @@
                   <a href="mailto:karunasusanbenny@gmail.com" class="email-link"
                     >karunasusanbenny@gmail.com<i
                       class="bx bx-arrow-up-stroke"
+                      aria-hidden="true"
                     ></i
                   ></a>
                   <p class="contact-quote">
                     "The best way to predict the future is to create it."
-                  </p>
+                  </D>
                   <div class="contact-socials">
                     <a
                       href="https://www.linkedin.com/in/karunasusanbenny/"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="linkedin Profile"
-                      ><i class="bxl bx-linkedin-square"></i
+                      ><i class="bxl bx-linkedin-square" aria-hidden="true"></i
                     ></a>
                     <a
                       href="https://github.com/karunasusan"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="GitHub profile"
-                      ><i class="bxl bx-github"></i
+                      ><i class="bxl bx-github" aria-hidden="true"></i
                     ></a>
                     <a
                       href="https://x.com/KarunaB2525"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Twitter Profile"
-                      ><i class="bxl bx-twitter-x"></i
+                      ><i class="bxl bx-twitter-x" aria-hidden="true"></i
                     ></a>
                     <a
                       href="https://www.instagram.com/__karuna.__/"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Instagram Profile"
-                      ><i class="bxl bx-instagram"></i
+                      ><i class="bxl bx-instagram" aria-hidden="true"></i
                     ></a>
                   </div>
                   <div class="quick-links">
@@ -842,6 +880,13 @@
                 </div>
                 <div class="contact-form-area">
                   <form name="contact" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="contact" />
+                    <p class="visually-hidden">
+                      <label>
+                        Don’t fill this out if you’re human:
+                        <input name="bot-field" />
+                      </label>
+                    </p>
                     <div class="form-group">
                       <label for="name" class="visually-hidden">Name</label>
                       <input
@@ -898,7 +943,8 @@
                       id="submit-btn"
                       disabled
                     >
-                      <span>Send</span><i class="bx bxs-send"></i>
+                      <span>Send</span
+                      ><i class="bx bxs-send" aria-hidden="true"></i>
                     </button>
                   </form>
                 </div>
@@ -921,8 +967,13 @@
 
     <script src="js/script.min.js" defer></script>
 
-    <button class="scroll-to-top-btn" id="scrollTopBtn" title="Back to Top">
-      <svg class="svgIcon" viewBox="0 0 384 512">
+    <button
+      class="scroll-to-top-btn"
+      id="scrollTopBtn"
+      title="Back to Top"
+      aria-label="Back to Top"
+    >
+      <svg class="svgIcon" viewBox="0 0 384 512" aria-hidden="true">
         <path
           d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
         ></path>
