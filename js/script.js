@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Element Definitions ---
   const pageWrapper = document.getElementById("page-wrapper");
   const hamburgerCheckbox = document.getElementById("checkbox");
+  const hamburgerLabel = document.querySelector("label.toggle[for='checkbox']");
   const mobileNav = document.getElementById("mobile-nav");
   const mobileNavLinks = document.querySelectorAll(
     ".mobile-nav-list .nav-item"
@@ -60,12 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- About Card Toggling ---
+  // --- About Card Toggling (with Keyboard support) ---
   aboutCards.forEach((card) => {
-    card.addEventListener("click", () => {
+    const cardClickHandler = () => {
       if (card.classList.contains("active")) return;
       aboutCards.forEach((c) => c.classList.remove("active"));
       card.classList.add("active");
+    };
+    card.addEventListener("click", cardClickHandler);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        cardClickHandler();
+      }
     });
   });
 
@@ -75,11 +83,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- Mobile Navigation Toggle ---
-  if (hamburgerCheckbox && pageWrapper && mobileNav) {
+  // --- Mobile Navigation Toggle (with ARIA) ---
+  if (hamburgerCheckbox && pageWrapper && mobileNav && hamburgerLabel) {
+    hamburgerLabel.setAttribute("aria-controls", "mobile-nav");
+    hamburgerCheckbox.setAttribute("aria-expanded", "false");
+
     hamburgerCheckbox.addEventListener("change", () => {
-      pageWrapper.classList.toggle("menu-open", hamburgerCheckbox.checked);
-      mobileNav.classList.toggle("is-open", hamburgerCheckbox.checked);
+      const isChecked = hamburgerCheckbox.checked;
+      pageWrapper.classList.toggle("menu-open", isChecked);
+      mobileNav.classList.toggle("is-open", isChecked);
+      hamburgerCheckbox.setAttribute("aria-expanded", isChecked);
     });
   }
 
@@ -184,17 +197,32 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(item);
   });
 
-  // --- Project Slideshow ---
+  // --- Project Slideshow (with ARIA) ---
   document.querySelectorAll(".project-card").forEach((projectCard) => {
     const slideshow = projectCard.querySelector(".project-slideshow");
     const slides = slideshow ? slideshow.querySelectorAll(".slide") : [];
     const dotsContainer = projectCard.querySelector(".slide-dots");
     const prevBtns = projectCard.querySelectorAll(".prev-slide");
     const nextBtns = projectCard.querySelectorAll(".next-slide");
+    const projectDetails = projectCard.querySelector(".project-details");
     let currentSlide = 0;
     let autoSlideInterval;
 
     if (!slideshow || slides.length === 0) return;
+
+    if (projectDetails) {
+      const slideLiveRegion = document.createElement("span");
+      slideLiveRegion.classList.add("visually-hidden");
+      slideLiveRegion.setAttribute("aria-live", "polite");
+      slideLiveRegion.setAttribute("aria-atomic", "true");
+      projectDetails.appendChild(slideLiveRegion);
+
+      slideshow.setAttribute("aria-roledescription", "carousel");
+      slides.forEach((slide, i) => {
+        slide.setAttribute("aria-roledescription", "slide");
+        slide.setAttribute("aria-label", `Slide ${i + 1} of ${slides.length}`);
+      });
+    }
 
     function showSlide(index) {
       if (index >= slides.length) {
@@ -205,6 +233,13 @@ document.addEventListener("DOMContentLoaded", () => {
       slides.forEach((slide) => slide.classList.remove("active"));
       slides[index].classList.add("active");
       currentSlide = index;
+
+      const slideLiveRegion = projectDetails.querySelector("span[aria-live]");
+      if (slideLiveRegion) {
+        slideLiveRegion.textContent = `Slide ${index + 1} of ${
+          slides.length
+        } shown.`;
+      }
 
       if (dotsContainer) {
         const dots = dotsContainer.querySelectorAll(".slide-dot");
@@ -268,13 +303,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const marqueeContent = document.getElementById("marquee-content");
   if (marqueeContent) {
     const icons = marqueeContent.querySelectorAll("i");
-
-    icons.forEach((icon) => {
-      const clone = icon.cloneNode(true);
-      marqueeContent.appendChild(clone);
-    });
-
-    marqueeContent.classList.add("animated");
+    if (icons.length > 0) {
+      icons.forEach((icon) => {
+        const clone = icon.cloneNode(true);
+        marqueeContent.appendChild(clone);
+      });
+      marqueeContent.classList.add("animated");
+    }
   }
 
   // --- Optimized Active Nav Highlighting (Fix for Forced Reflow) ---
@@ -339,11 +374,10 @@ document.addEventListener("DOMContentLoaded", () => {
       false
     )
   );
-
   window.addEventListener("scroll", updateActiveNav);
   updateActiveNav();
 
-  // --- Contact Form Validation ---
+  // --- Contact Form Validation & AJAX Submission ---
   const contactForm = document.forms["contact"];
   if (contactForm) {
     contactForm.setAttribute("novalidate", "");
@@ -355,6 +389,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const emailError = document.getElementById("email-error");
     const messageError = document.getElementById("message-error");
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const formStatus = document.createElement("div");
+    formStatus.classList.add("form-status-message");
+    submitBtn.insertAdjacentElement("afterend", formStatus);
 
     const validationState = { name: false, email: false, message: false };
 
@@ -438,6 +476,42 @@ document.addEventListener("DOMContentLoaded", () => {
     nameInput.addEventListener("blur", validateName);
     emailInput.addEventListener("blur", validateEmail);
     messageInput.addEventListener("blur", validateMessage);
+
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (submitBtn.disabled) return;
+
+      submitBtn.disabled = true;
+      submitBtn.querySelector("span").textContent = "Sending...";
+      formStatus.classList.remove("success", "error");
+      formStatus.textContent = "";
+
+      const formData = new FormData(contactForm);
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      })
+        .then(() => {
+          formStatus.textContent =
+            "Message sent successfully! I'll get back to you soon.";
+          formStatus.classList.add("success");
+          contactForm.reset();
+          validationState.name = false;
+          validationState.email = false;
+          validationState.message = false;
+        })
+        .catch((error) => {
+          formStatus.textContent =
+            "There was an error sending your message. Please try again.";
+          formStatus.classList.add("error");
+        })
+        .finally(() => {
+          submitBtn.disabled = true;
+          submitBtn.querySelector("span").textContent = "Send";
+        });
+    });
   }
 
   // --- Scroll-to-Top Button ---

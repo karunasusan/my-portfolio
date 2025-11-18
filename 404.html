@@ -13,12 +13,12 @@
 
     <meta
       name="theme-color"
-      content="#000000"
+      content="#111111"
       media="(prefers-color-scheme: dark)"
     />
     <meta
       name="theme-color"
-      content="#f4f2ee"
+      content="#F4F6F8"
       media="(prefers-color-scheme: light)"
     />
 
@@ -41,7 +41,6 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="assets/icons/favicon.ico" sizes="any" />
-    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -63,11 +62,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.boxicons.com" crossorigin />
+
     <link
       rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600&display=swap"
       as="style"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
     <link
       href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
       rel="preload"
@@ -83,18 +88,13 @@
 
     <link
       rel="preload"
-      href="css/style.css"
+      href="css/style.min.css"
       as="style"
       onload="this.rel='stylesheet'"
     />
     <noscript>
-      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/style.min.css" />
     </noscript>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
 
     <noscript
       ><link
@@ -108,54 +108,29 @@
     /></noscript>
 
     <style>
-      body {
+      body.loading .page-wrapper {
+        opacity: 0;
+      }
+      .loader-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 100vh;
-        padding: 4rem 2rem;
-        text-align: center;
+        background-color: var(--bg, #111);
+        z-index: 9999;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
       }
-      .error-page__back-link {
-        position: absolute;
-        top: 2rem;
-        left: 2rem;
-        width: fit-content;
-      }
-      .error-card {
-        max-width: 800px;
-        margin: auto;
-        background: var(--bg-alt);
-        border-radius: 12px;
-        border: 1px solid var(--border-color);
-        overflow: hidden;
-      }
-      .error-card__content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 4rem 2rem;
-      }
-      .error-card__image {
-        max-width: 100%;
-        width: 300px;
-        height: auto;
-        margin-bottom: 3rem;
-      }
-      .error-card__title {
-        font-family: var(--font-heading);
-        font-size: 3rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-      }
-      .error-card__message {
-        color: var(--text-secondary);
-        max-width: 35ch;
+      .loader-wrapper.hidden {
+        opacity: 0;
+        visibility: hidden;
       }
     </style>
   </head>
-  <body>
+  <body class="error-page-body">
     <a href="index.html" class="btn btn-primary error-page__back-link">
       <i class="bx bx-chevron-left"></i>
       <span>Back to Home</span>

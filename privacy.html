@@ -13,12 +13,12 @@
 
     <meta
       name="theme-color"
-      content="#000000"
+      content="#111111"
       media="(prefers-color-scheme: dark)"
     />
     <meta
       name="theme-color"
-      content="#f4f2ee"
+      content="#F4F6F8"
       media="(prefers-color-scheme: light)"
     />
 
@@ -41,7 +41,6 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="assets/icons/favicon.ico" sizes="any" />
-    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -63,11 +62,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.boxicons.com" crossorigin />
+
     <link
       rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600&display=swap"
       as="style"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
     <link
       href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
       rel="preload"
@@ -83,18 +88,13 @@
 
     <link
       rel="preload"
-      href="css/style.css"
+      href="css/style.min.css"
       as="style"
       onload="this.rel='stylesheet'"
     />
     <noscript>
-      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/style.min.css" />
     </noscript>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oregano&family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
 
     <noscript
       ><link
@@ -108,58 +108,30 @@
     /></noscript>
 
     <style>
-      body {
-        padding: 8rem 2rem 4rem;
+      body.loading .page-wrapper {
+        opacity: 0;
       }
-      .privacy-page__back-link {
-        position: absolute;
-        top: 2rem;
-        left: 2rem;
-        width: fit-content;
+      .loader-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--bg, #111);
+        z-index: 9999;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
       }
-      .privacy-card {
-        max-width: 800px;
-        margin: auto;
-        background: var(--bg-alt);
-        border-radius: 12px;
-        border: 1px solid var(--border-color);
-        overflow: hidden;
-      }
-      .privacy-card__content {
-        padding: 2.5rem 4rem;
-        text-align: left;
-      }
-      .privacy-card__title {
-        font-family: var(--font-heading);
-        font-size: 3.2rem;
-        color: var(--text-primary);
-        margin-bottom: 2rem;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 1rem;
-      }
-      .privacy-card__heading {
-        font-size: 2.4rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-top: 3rem;
-        margin-bottom: 1.5rem;
-      }
-      .privacy-card__text {
-        color: var(--text-secondary);
-        margin-bottom: 1.5rem;
-        line-height: 1.8;
-      }
-      .privacy-card__link {
-        color: var(--primary);
-        font-weight: 500;
-        text-decoration: none;
-      }
-      .privacy-card__link:hover {
-        text-decoration: underline;
+      .loader-wrapper.hidden {
+        opacity: 0;
+        visibility: hidden;
       }
     </style>
   </head>
-  <body>
+
+  <body class="privacy-page-body">
     <a href="index.html" class="btn btn-primary privacy-page__back-link">
       <i class="bx bx-chevron-left"></i>
       <span>Back to Home</span>
