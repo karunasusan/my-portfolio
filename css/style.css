@@ -777,7 +777,7 @@ input:checked + .slider:before {
   color: var(--text-secondary);
   font-size: 1.6rem;
   font-weight: 500;
-  font-family: var(--transition-smooth);
+  font-family: var(--font-body);
   padding: 1rem;
   border-radius: 8px;
   transition: var(--transition-smooth);

@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isChecked = hamburgerCheckbox.checked;
       pageWrapper.classList.toggle("menu-open", isChecked);
       mobileNav.classList.toggle("is-open", isChecked);
-      hamburgerCheckbox.setAttribute("aria-expanded", isChecked);
+      hamburgerCheckbox.setAttribute("aria-expanded", String(isChecked)) 
     });
   }
 
